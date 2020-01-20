@@ -6,6 +6,7 @@ package-lock.json
 .DS_Store
 
 *.xlsx
+scratch
 *scratch*
 *template*
 README.template.md

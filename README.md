@@ -1,17 +1,12 @@
-The README for a code pattern is very prescriptive, use the following template to get you started.
-
-<!-- Put badges at the very top -->
-<!-- Change the repo -->
-[![Build Status](https://travis-ci.org/IBM/watson-banking-chatbot.svg?branch=master)](https://travis-ci.org/IBM/watson-banking-chatbot)
-
-<!-- Add a new Title and fill in the blanks -->
 # Code patterns showing TDD in Node.js and containers
 
-<!-- TDD stands for? -->
 
-In this code pattern, we will show you how to create a world class   microservice using NodeJS and Containers. <add this is a currency conversion app>  i.e. a representation of a business need (Convert Currency value from one currency, say South African Rands [ZAR] to Pounds Sterling [GBP] using the most current daily exchange rate from ext API ...)  
+> Test-driven development is a type of testing that flips development backwards.  So, instead of writing your code and then retroactively fitting a test to test the piece of code you just wrote, test-driven development flips the process.
+> In TDD, you write your unit-test first, it fails, then implement code changes until the test passes. Sounds backwards, right? But the code you produce when you use this testing methodology is cleaner and less prone to breaking. 
 
 
+
+In this code pattern, we will show you how to create a world class  currency conversion microservice using TDD, NodeJS and Containers.  
 
 We will use the latest and best npm libs ( as of writing this pattern 2020 jan) technologies used in NodeJS development:
 #### 1) Version of JavaScript
@@ -118,6 +113,7 @@ Video 2: show bug
 # Steps to run pattern
 1. Setup NVM
 << squiggly deets here on how to use NVM >>
+
 1. NB use node version 10.16.1 later
 1. git clone which will setup <<scaffolding>> directories, and files
 
@@ -125,12 +121,9 @@ Video 2: show bug
 1. Install packages with NPM
 
 
-
-
-
 1. Travis setup in repo <<tbd ? who in team can help here? >>
 1. Dockerize 
-<squilly >
+<display>
 1. Prepare microservice for deployment to Kubernetes or Openshift
 
     8.1. Dockerfile prep
@@ -140,7 +133,7 @@ Video 2: show bug
 1. Deploy to IBM Cloud
 
     9.1 OpenShift v4
-
+</display>
     ### next steps for the advance interested user
 
 1. Functional - Smoke testing
@@ -148,13 +141,6 @@ Video 2: show bug
 1. User acceptence testing
 1. rinse lather and repeat! ( refine app goto step 4 )
 
-
-Use the **Deploy to IBM Cloud** button **OR** create the services and run locally.
-
-<!--Optionally, add a deploy to ibm cloud button-->
-
-what follows below is just the template for README and 
-I'll look at that tomorrow
 
 ## Deploy to IBM Cloud
 
@@ -194,12 +180,10 @@ https://nordicapis.com/using-test-driven-development-for-microservices/
 
 ![sample_output](doc/source/images/sample_output.png)
 
-<!--Optionally, include any troubleshooting tips (driver issues, etc)-->
-
 # Troubleshooting
-
-
 <!-- keep this -->
+sudo root node / npm
+
 ## License
 
 This code pattern is licensed under the Apache License, Version 2. Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1](https://developercertificate.org/) and the [Apache License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).

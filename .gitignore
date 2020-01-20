@@ -1,0 +1,14 @@
+
+dist/
+node-modules/
+package-lock.json
+
+.DS_Store
+
+*.xlsx
+*scratch*
+*template*
+README.template.md
+pattern-template.md
+pattern.md
+

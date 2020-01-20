@@ -1,0 +1,95 @@
+#YAML swagger for currency microservice
+swagger: '2.0'
+info:
+  description: >-
+    This is a microservice that handles currency exchange rate data for Bee Travel
+  version: 1.0.0
+  title: Bee Travel Currency Data Service
+  contact:
+    email: grant.steinfeld@ibm.com
+  license:
+    name: Apache 2.0
+    url: 'https://github.com/bee-travels/bee-travels/blob/master/LICENSE'
+host: 'localhost:40001'
+basePath: /api/v1
+tags:
+  - name: Currency
+    description: Operations associated with currency exchange rate conversions
+schemes:
+  - http
+paths:
+  /currency:
+    get:
+      tags:
+        - Currency
+      summary: Gets list of all currency exchange rates from external API for the current day expressed in Euros
+      description: 'calls the exchangeratesapi.io'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successfully got list of currency exchange rates
+        '500':
+          description: Internal Server Error
+  /currency/{currencyFromAmount}/{currencyFromCode}/{currencyToCode}:
+    get:
+      tags:
+        - Conversion
+      summary: given currencyFromCode and currencyFromAmount (float) and currencyToCode, using daily rates, RETURNS the currencyToCode value (float)
+      description: 'get the latest conversion rate for the day based off the clock on the server'
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: currencyFromAmount
+          description: currency to convert from value (float)
+          required: true
+        - in: path
+          name: currencyFromCode
+          description: currency (3 character code) to convert from
+          required: true
+        - in: path
+          name: currencyToCode
+          description: currency (3 character code) to convert to
+          required: true
+      responses:
+        '200':
+          description: Successfully got currency name and 3 character currency code data
+        '500':
+          description: Internal Server Error
+  /currency/search/:
+    post:
+      tags:
+        - name: CurrencyMeta
+          description: currency names and 3 character currency code ( ISO-4217 )
+       
+
+      summary: given CountryName or CurrencyCode, return CountryName, CurrencyName and CurrencyCode
+      description: 'Search for currency metadata'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          description: in body JSON pass Country name ( or replace Country with CurrencyCode )
+          required: true
+          schema:
+            $ref: '#/definitions/currencyNameOrCurrencyCode'
+      responses:
+        '200':
+          description: Successfully retrieved metatdata
+        '404':
+          description: Key not found
+        '500':
+          description: Internal Server Error
+
+        '502':
+          description: Error connecting to service
+
+definitions:
+  currencyNameOrCurrencyCode:
+    properties:
+      Country:
+        type: string

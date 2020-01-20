@@ -1,0 +1,5 @@
+---
+applications:
+ - name: bee-travels-currency-exchange
+   random-route: true
+   memory: 256M

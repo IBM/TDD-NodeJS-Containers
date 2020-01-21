@@ -1,29 +1,120 @@
 # Code patterns showing TDD in Node.js and containers
 
-
-> Test-driven development is a type of testing that flips development backwards.  So, instead of writing your code and then retroactively fitting a test to test the piece of code you just wrote, test-driven development flips the process.
-> In TDD, you write your unit-test first, it fails, then implement code changes until the test passes. Sounds backwards, right? But the code you produce when you use this testing methodology is cleaner and less prone to breaking. 
-
-
-
 In this code pattern, we will show you how to create a world class  currency conversion microservice using TDD, NodeJS and Containers.  
 
-We will use the latest and best npm libs ( as of writing this pattern 2020 jan) technologies used in NodeJS development:
-#### 1) Version of JavaScript
-[ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later)
+We will attempt to use and showcase modern NodeJS development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in `Anatomy of this app` section at the bottom of this page.
 
-#### 2) Testing Framework for Test Driven Development (TDD)
-[Jest](https://jestjs.io/) `delightful unittest framework`
+The libraries that are relavent to TDD are as follows.
+1. [Jest](https://jestjs.io/)  a JavaScript  unit-test framework`
 
-#### 3) Best Practice (?? of breed tooling)
 
-*  Use Virtual environments [add explanation why digital ocean python venvs idea ] - Node Version Manager ([NVM](https://github.com/nvm-sh/nvm))
-    * choose and switch which version of node and NPM that suits your project 
-        * don't use the system version ever! It may and probably will change and could affect you program.
-        * don't change the system version, it could affect other programs, or even worse your operating system and cause your computer or Virtual Server to crash!
-        * If you want to use mulitple different versions of node which is often required these days, NVM will be your friend!
+### When you have completed this code pattern, you will understand how to:
 
-        * no -g no sudo def not su /
+* How to use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
+* The importance of Test Driven Development (TDD) and how by incorporating tests throughout the development - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possilbe even after code changes due to either new feature requests or bug fixes are requeseted or found in QA
+* write test first that break - philiosophy
+* design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitons, by just adding a simple swagger.yaml file!  
+
+
+## Design time Flow
+It is during coding ( aka Design time ) that TDD is practiced.
+
+### The Red-Green-Refactor process
+
+The Red-Green-Refactor process is the core part of TDD, without it no other aspect of TDD will function.
+
+The name comes from the status of the tests within the cycle. When in the red state, code does not work.  When in the green state everything is working, but not necessary in the most optimal way.  When in the teal phase we are refactoring phase where we are confident our code is covered with tests and thereby gives us the confidence to change and improve our code.
+
+Figure 1 below showing the steps that typically occur when working in 
+a test driven way ( aka Red-Green-Refactoring)
+
+![design time flow red green refactoring](doc/source/images/red-green-refactoring.jpg)
+
+
+***figure 1: red-green-refactoring***
+
+
+
+1. Pick a story ( e.g. feature request  or bug/issue )
+1. Write a unit-test that represents the story
+1. Run the test, it will fail (RED)
+1. Implement business logic towards making this test to pass
+1. Run the test until it passes (GREEN)
+1. Refactor business logic to improve code (TEAL)
+
+
+<!--Optionally, update this section when the video is created-->
+# Watch the Video
+### Test Driven Devlopment (TDD) in action
+
+[![video using TDD to add a feature](http://img.youtube.com/vi/Jxi7U7VOMYg/0.jpg)](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
+***Video 1: add a feature***
+
+[![video using TDD to fix a bug](http://img.youtube.com/vi/Jxi7U7VOMYg/0.jpg)](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
+***Video 2: fix a bug***
+
+
+
+## Runtime Flow
+![run time flow](doc/source/images/architecture.jpg)
+***figure 2: production flow***
+
+1. Consumer calls our  microservice over the internet (http/s request)
+1. ExpressJS `web server`   accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66)
+1. Code routing in Express passes the request to a service module which in turn calls the European Currency Exchange API
+1. An exchange rate for ZAR is retrieved and stored.  The value of 600.66 South African Rands (ZAR) is converted to US Dollars(USD)
+1. The ExpressJS `web server` sends a response to the calling Consumer
+with the dollar amount ( e.g. $40.59 )
+
+
+
+
+
+# Steps to run this code pattern
+## run locally
+1. Clone the repo by running `git clone 
+1. Ensure [Node.js](https://nodejs.org/en/) 10.16.1 later installed
+by running `node -v`
+
+<details><summary><strong>Recommendation use NVM to run Node</strong></summary>
+Use Node Version Manager(NVM) to control the version of node you use, as the system or installed node may need to change from project to project on your local development environment.
+
+Node Version Manager ([NVM](https://github.com/nvm-sh/nvm))
+allows you to choose and switch which version of node and NPM that suits your project 
+
+If you want to use mulitple different versions of node which is often required these days, NVM will be your friend!
+
+</details>
+
+1. Install packages with NPM by running `npm install`
+1. Start the app by running  `npm start`
+1. Browse the API from your browser `localhost:3000`
+
+> Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
+
+
+
+## Deploy to IBM Cloud
+
+1. Dockerize 
+<details><summary>deploy to Kubernetes OpenShift</summary>
+    Prepare microservice for deployment to Kubernetes or Openshift
+
+    Dockerfile prep
+
+    Create docker image and push to DockerHub or IKS
+
+    Deploy to IBM Cloud OpenShift v4
+</details>
+    
+
+<!--Add a section that explains to the reader what typical output looks like, include screenshots -->
+
+# Anatomy of this app
+
+#### 3) Best Practice - tooling
+
+
 
 * Testing frameworks
 
@@ -46,10 +137,10 @@ We will use the latest and best npm libs ( as of writing this pattern 2020 jan) 
     * [Babel JS](https://babeljs.io/)
         * Use next generation JavaScript, today
             * Put ***in*** next-gen(latest and greatest) JavaScript and get cross browser-compatible JavaScript ***out***
+
 * On page save hooks
     * run tests automatically using `Jest -watch`
-* On commit pre-hooks
-    * << tbd need to check - maybe python only? >>
+
 * [`rimraf`](https://www.npmjs.com/package/rimraf)
     * Cleanup previous builds and distributions
         * rimraf is The UNIX command `rm -rf` for ***node***
@@ -57,121 +148,6 @@ We will use the latest and best npm libs ( as of writing this pattern 2020 jan) 
     * by installing the npm package `swagger-ui-express` you can
     create a REST api with a well documented test harness with almost no effort at all, giving your microservice that professional and polished look as well as a useful way to manually test the API from a swagger html test harness.
 
-
-When you have completed this code pattern, you will understand how to:
-
-* How to use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
-* The importance of Test Driven Development (TDD) and how by incorporating tests throughout the development - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possilbe even after code changes due to either new feature requests or bug fixes are requeseted or found in QA
-* write test first that break - philiosophy
-* design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitons, by just adding a simple swagger.yaml file!  
-
-
-<!--add an image in this path-->
-
-figure 1: design time TDD process flow
-
-## design time TDD Flow
-<!-- main point move up top -->
-1. View and understand the TDD method for unit tests for each feature you might adding
-
-    4.1 Expect tests to break ( this is good at this point )
-
-    4.2 Write business logic towards making the intial test to pass
-
-    4.3 Continue and iterate until all test pass!
-
-    4.4 rinse lather and repeat!
-
-
-
-<!--Optionally, add flow steps based on the architecture diagram-->
-
-# Watch the Video
-### Test Driven Devlopment (TDD) in action
-<< here we can illustrate how a bug, was fixed using a best practice methodology that uses TDD as it's underpinning >>
-
-## Runtime Flow
-![architecture](doc/source/images/architecture.jpg)
-***figure 2: prodction flow***
-
-1. Consumer calls our  microservice over the internet (http/s request)
-2. ExpressJS `web server`   accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66)
-3. Code routing in Express passes the request to a service module which in turn calls the European Currency Exchange API
-4. An exchange rate for ZAR is retrieved and stored.  The value of 600.66 South African Rands (ZAR) is converted to US Dollars(USD)
-5. The ExpressJS `web server` sends a response to the calling Consumer
-with the dollar amount ( e.g. $40.59 )
-
-
-
-
-<!--Optionally, update this section when the video is created-->
-#### to learn more/next possible steps
-video 1: add feature request
-Video 2: show bug 
-[![video](http://img.youtube.com/vi/Jxi7U7VOMYg/0.jpg)](https://www.youtube.com/watch?v=Jxi7U7VOMYg) << TDB host? where youtube -->>
-
-# Steps to run pattern
-1. Setup NVM
-<< squiggly deets here on how to use NVM >>
-
-1. NB use node version 10.16.1 later
-1. git clone which will setup <<scaffolding>> directories, and files
-
-   
-1. Install packages with NPM
-
-
-1. Travis setup in repo <<tbd ? who in team can help here? >>
-1. Dockerize 
-<display>
-1. Prepare microservice for deployment to Kubernetes or Openshift
-
-    8.1. Dockerfile prep
-
-    8.2 Create docker image and push to DockerHub or IKS
-
-1. Deploy to IBM Cloud
-
-    9.1 OpenShift v4
-</display>
-    ### next steps for the advance interested user
-
-1. Functional - Smoke testing
-1. QA testing
-1. User acceptence testing
-1. rinse lather and repeat! ( refine app goto step 4 )
-
-
-## Deploy to IBM Cloud
-
-
-<!--update with service names from manifest.yml-->
-
-
-## Run locally
-
-
-
-<!-- there are MANY updates necessary here, just screenshots where appropriate -->
-
-1. [Clone the repo](#1-clone-the-repo).
-
-5. [Run the application](#6-run-the-application).
-
-### 1. Clone the repo
-
-### 2. Create Watson services
-
-
-### 6. Run the application
-
-1. Install [Node.js](https://nodejs.org/en/) runtime or NPM.
-1. Start the app by running `npm install`, followed by `npm start`.
-1. Use the chatbot at `localhost:3000`.
-
-> Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
-
-<!--Add a section that explains to the reader what typical output looks like, include screenshots -->
 
 # Resources
 https://nordicapis.com/using-test-driven-development-for-microservices/

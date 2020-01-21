@@ -2,10 +2,10 @@
 
 In this code pattern, we will show you how to create a world class  currency conversion microservice using TDD, NodeJS and Containers.  
 
-We will attempt to use and showcase modern NodeJS development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in `Anatomy of this app` section at the bottom of this page.
+We will attempt to use and showcase modern NodeJS development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in `Anatomy of this Application` section at the bottom of this page.
 
-The libraries that are relavent to TDD are as follows.
-1. [Jest](https://jestjs.io/)  a JavaScript  unit-test framework`
+The JavaScript unit-test framework testing library we use for TDD is
+[Jest](https://jestjs.io/).
 
 
 ### When you have completed this code pattern, you will understand how to:
@@ -110,40 +110,39 @@ If you want to use mulitple different versions of node which is often required t
 
 <!--Add a section that explains to the reader what typical output looks like, include screenshots -->
 
-# Anatomy of this app
-
-#### 3) Best Practice - tooling
-
+## Anatomy of this Application
+The currency exchange micro-service uses the following libraries that are common in a modern JavaScript application:
 
 
-* Testing frameworks
 
-    * Jest for `Delightful` Unittesting 
-        * use Jest `mocks` to run unit tests locally 
-            * avoid side-effects
-                * like calling external services that could have changes or be offline, like other web apis ( e.g. The World Bank currency exchange api our micro service wraps ) 
-                * external databases that could be in-flux or even down as well
-                * time stamps and random ID generation are non-determisitic, so not good for test data that may be generated on the fly ( mocks really shine here and provide expected reliable values that tests your business logic )
-        * working documentation
+* Jest for `Delightful` Unittesting 
+    * use Jest `mocks` to run unit tests locally without side-effects
+        <details><summary>examples of side effects</summary>
+            * like calling external services that could have changes or be offline, like other web apis ( e.g. The World Bank currency exchange api our micro service wraps ) 
+            * external databases that could be in-flux or even down as well
+            * time stamps and random ID generation are non-determisitic, so not good for test data that may be generated on the fly ( mocks really shine here and provide expected reliable values that tests your business logic )
+    </details>
+
+    * Hot code reloading (aka On page save hooks) run tests automatically by running `Jest -watch`
+
+
 
 * Code formatting
     * Prettier 
-    * git precommit hooks???
 
 * JavaScript syntax checking
     * [ESLint](https://eslint.org/)
         * Find and fix problems in your JavaScript code
+
 * JavaScript Build Compiler
     * [Babel JS](https://babeljs.io/)
         * Use next generation JavaScript, today
             * Put ***in*** next-gen(latest and greatest) JavaScript and get cross browser-compatible JavaScript ***out***
 
-* On page save hooks
-    * run tests automatically using `Jest -watch`
-
 * [`rimraf`](https://www.npmjs.com/package/rimraf)
     * Cleanup previous builds and distributions
         * rimraf is The UNIX command `rm -rf` for ***node***
+
 * `swagger` 
     * by installing the npm package `swagger-ui-express` you can
     create a REST api with a well documented test harness with almost no effort at all, giving your microservice that professional and polished look as well as a useful way to manually test the API from a swagger html test harness.

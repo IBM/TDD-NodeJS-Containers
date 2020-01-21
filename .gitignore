@@ -5,6 +5,7 @@ package-lock.json
 
 .DS_Store
 *.png
+*.gif
 *.psd
 *.xlsx
 scratch

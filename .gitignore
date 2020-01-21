@@ -1,4 +1,4 @@
-
+resources/
 dist/
 node-modules/
 package-lock.json

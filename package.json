@@ -29,19 +29,19 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "jest": "^24.9.0",
+    "babel-watch": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "clean-css": ">=4.1.11",
+    "constantinople": ">=3.1.1",
+    "eslint": "^6.5.1",
+    "prettier": "^1.19.1",
+    "uglify-js": ">=2.6.0",
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
-    "@babel/runtime": "^7.7.2",
-    "babel-eslint": "^10.0.3",
-    "babel-watch": "^7.0.0",
-    "clean-css": ">=4.1.11",
-    "constantinople": ">=3.1.1",
-    "eslint": "^6.5.1",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
-    "uglify-js": ">=2.6.0"
+    "@babel/runtime": "^7.7.2"
   }
 }

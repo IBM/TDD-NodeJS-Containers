@@ -1,6 +1,9 @@
-# Code patterns showing TDD in Node.js and containers
+# Code patterns showing Test Driven Development( TDD ) in NodeJS and containers
 
-In this code pattern, we will show you how to create a world class  currency conversion microservice using TDD, NodeJS and Containers.  
+In this code pattern, we will show you how to create a world class  currency conversion microservice using Test Driven Development (TDD), NodeJS and Containers.  This see this microservice in context take a look at the [Bee Travels project](https://github.com/bee-travels)
+
+TDD is ... way to write code, where you write unit-tests first then implement code afterwards ...
+...
 
 We will attempt to use and showcase modern NodeJS development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in `Anatomy of this Application` section at the bottom of this page.
 
@@ -10,10 +13,11 @@ The JavaScript unit-test framework testing library we use for TDD is
 
 ### When you have completed this code pattern, you will understand how to:
 
-* How to use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
+
 * The importance of Test Driven Development (TDD) and how by incorporating tests throughout the development - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possilbe even after code changes due to either new feature requests or bug fixes are requeseted or found in QA
 * write test first that break - philiosophy
 * design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitons, by just adding a simple swagger.yaml file!  
+* How to use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
 
 
 ## Design time Flow
@@ -93,27 +97,19 @@ If you want to use mulitple different versions of node which is often required t
 > Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
 
 
+## CI/CD - Travis ?
+the unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipline and will either all pass and integration and deployment will happen, however if test fail the process is halted, thus ensuring the `build is not broken`
 
-## Deploy to IBM Cloud
 
-1. Dockerize 
-<details><summary>deploy to Kubernetes OpenShift</summary>
-    Prepare microservice for deployment to Kubernetes or Openshift
-
-    Dockerfile prep
-
-    Create docker image and push to DockerHub or IKS
-
-    Deploy to IBM Cloud OpenShift v4
-</details>
     
 
 <!--Add a section that explains to the reader what typical output looks like, include screenshots -->
 
 ## Anatomy of this Application
-The currency exchange micro-service uses the following libraries that are common in a modern JavaScript application:
+The currency exchange micro-service uses the following libraries that could constitute the fabric in creating a modern JavaScript application:
 
 
+###Design / Development time:
 
 * Jest for `Delightful` Unittesting 
     * use Jest `mocks` to run unit tests locally without side-effects
@@ -124,7 +120,6 @@ The currency exchange micro-service uses the following libraries that are common
     </details>
 
     * Hot code reloading (aka On page save hooks) run tests automatically by running `Jest -watch`
-
 
 
 * Code formatting
@@ -144,8 +139,7 @@ The currency exchange micro-service uses the following libraries that are common
         * rimraf is The UNIX command `rm -rf` for ***node***
 
 * `swagger` 
-    * by installing the npm package `swagger-ui-express` you can
-    create a REST api with a well documented test harness with almost no effort at all, giving your microservice that professional and polished look as well as a useful way to manually test the API from a swagger html test harness.
+    * by installing the npm package `swagger-ui-express` you can create a REST api with a well documented test harness with almost no effort at all, giving your microservice that professional and polished look as well as a useful way to manually test the API from a swagger html test harness.
 
 
 # Resources

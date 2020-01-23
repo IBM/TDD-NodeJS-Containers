@@ -157,6 +157,7 @@ The currency exchange micro-service uses the following libraries that could cons
 # Resources
 [Using Test-Driven Development for Microservices by Bill Doerrfeld](https://nordicapis.com/using-test-driven-development-for-microservices/)
 
+[Test-Driven Java Development, Second Edition: Invoke TDD principles for end-to-end application development, 2nd Edition by Farcic, Viktor](https://www.amazon.com/Test-Driven-Java-Development-Viktor-Farcic-ebook/dp/B00YSIM3SC)
 
 
 

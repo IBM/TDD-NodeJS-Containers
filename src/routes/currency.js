@@ -52,8 +52,10 @@ router.get(
       currencyToCode.trim(),
       'latest'
     );
-
-    res.json({ result: data });
+    
+    console.log(data);
+    
+    return res.json({ result: data });
   })
 );
 

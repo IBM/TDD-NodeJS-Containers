@@ -63,7 +63,8 @@ The name comes from the status of the tests within the cycle. When in the red st
 See how a bug that surfaced during the actual production of this code base and how we
 fixed it using TDD!
 
-[![video using TDD to fix a bug]()](https://www.youtube.com/watch?v=pzLJ1cMhnc8)
+[video using TDD to fix a bug](https://www.youtube.com/watch?v=pzLJ1cMhnc8)
+
 ***Video 1: fixing a bug with TDD***
 
 

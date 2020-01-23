@@ -3,6 +3,7 @@
  * from an external API
  */
 import axios from 'axios';
+import NotFoundError from '../errors/NotFoundError';
 
 export const BASE_URL_ENDPOINT = 'https://api.exchangeratesapi.io/';
 
@@ -18,10 +19,10 @@ async function getCurrencyExchangeRate(
     if (data.rates[countryCurrencyCode]) {
       return data.rates[countryCurrencyCode];
     } else {
-      throw new Error(`no country code ${countryCurrencyCode}`);
+      throw new NotFoundError(`no country code ${countryCurrencyCode}`);
     }
   }
-  throw new Error(`please provide a currency code`);
+  throw new NotFoundError(`please provide a currency code`);
 }
 
 async function getCurrencyExchangeRates(timeIndicator = 'latest') {

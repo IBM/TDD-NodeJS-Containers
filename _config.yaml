@@ -1,12 +1,3 @@
 markdown: kramdown
 kramdown:
   parse_block_html: true
-  
-<!--
-
-
-<details><summary><strong>Learn More</strong></summary>
-
-ipsum dolorum
-
-</details>

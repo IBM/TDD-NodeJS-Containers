@@ -6,7 +6,7 @@ In this code pattern, we will show you how to create a world class currency conv
 
 TDD is a style of programming that closely intertwines coding, testing, and designing. To illustrate, when designing the functionality of your application, you would write unit-tests first then implement the code afterwards.
 
-We will attempt to use and showcase modern Node.js development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
+We will attempt to use and showcase modern Node.js development by using Modern JavaScript [ECMA script](http://www.ecma-international.org/ecma-262/) and popular NPM libraries - listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
 
 The JavaScript unit-test framework testing library we will use for TDD in this code pattern is [Jest](https://jestjs.io/).
 

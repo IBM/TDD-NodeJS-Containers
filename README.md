@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.com/IBM/TDD-NodeJS-Containers.svg?branch=master)](https://travis-ci.com/IBM/TDD-NodeJS-Containers)
 
-# Test Driven Development (TDD) in NodeJS
+# Test Driven Development (TDD) in Node.js
 
-In this code pattern, we will show you how to create a world class currency conversion microservice using Test Driven Development (TDD) in NodeJS.  This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels)
+In this code pattern, we will show you how to create a world class currency conversion microservice using Test Driven Development (TDD) in Node.js.  This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels)
 
 TDD is a style of programming that closely intertwines coding, testing, and designing. To illustrate, when designing the functionality of your application, you would write unit-tests first then implement the code afterwards.
 
-We will attempt to use and showcase modern NodeJS development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in the [Anatomy of this Application](##anatomy-of-this-application) section at the bottom of this page.
+We will attempt to use and showcase modern Node.js development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in the [Anatomy of this Application](##anatomy-of-this-application) section at the bottom of this page.
 
 The JavaScript unit-test framework testing library we will use for TDD in this code pattern is [Jest](https://jestjs.io/).
 
@@ -28,7 +28,7 @@ The linter is `eslint` and it can be called by running `npm run lint` and the fo
 * Incorporate tests throughout the development lifecycle - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possible even after code changes due to either new feature requests or bug fixes are requested or found in QA
 * Write test first that break - philosophy
 * Design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitions, by just adding a simple swagger.yaml file!  
-* Use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
+* Use this simple microservice application as a basis to create awesome world class microservices using Node.js and the latest version of JavaScript, ie ECMA Script.
 
 
 ## Design time Flow
@@ -80,7 +80,7 @@ This flow is for the runtime of the currency conversion microservice.
 
 
 1. Consumer calls the microservice over the internet (http/s request)
-1. ExpressJS `web server`   accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66)
+1. ExpressJS `web server`  accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66)
 1. Code routing in Express passes the request to a service module which in turn calls the European Currency Exchange API
 1. An exchange rate for ZAR is retrieved and stored.  The value of 600.66 South African Rands (ZAR) is converted to US Dollars(USD)
 1. The ExpressJS `web server` sends a response to the calling Consumer
@@ -101,7 +101,7 @@ Use Node Version Manager(NVM) to control the version of node you use, as the sys
 Node Version Manager ([NVM](https://github.com/nvm-sh/nvm))
 allows you to choose and switch which version of node and NPM that suits your project 
 
-If you want to use mulitple different versions of node which is often required these days, NVM will be your friend!
+If you want to use multiple or different versions of node which is often required these days, NVM will be your friend!
 
 </details>
 
@@ -128,7 +128,7 @@ The currency exchange micro-service uses the following libraries that could cons
         <details><summary>examples of side effects</summary>
             * like calling external services that could have changes or be offline, like other web apis ( e.g. The World Bank currency exchange api our micro service wraps ) 
             * external databases that could be in-flux or even down as well
-            * time stamps and random ID generation are non-determisitic, so not good for test data that may be generated on the fly ( mocks really shine here and provide expected reliable values that tests your business logic )
+            * time stamps and random ID generation are non-deterministic, so not good for test data that may be generated on the fly ( mocks really shine here and provide expected reliable values that tests your business logic )
     </details>
 
     * Hot code reloading (aka On page save hooks) run tests automatically by running `Jest -watch`

@@ -10,6 +10,15 @@ We will attempt to use and showcase modern NodeJS development by using  [ECMA sc
 
 The JavaScript unit-test framework testing library we will use for TDD in this code pattern is [Jest](https://jestjs.io/).
 
+### Unit-tests are the main type of tests on TDD
+There are a number of types of tests in software; however, in TDD, unit-tests are the tests that we are concerned with.  Unit-tests are derived from feature requests or bug fixes and they are written first.  Consequently unit-tests then become self documentation of the system.  
+
+Jest Unit-Tests use the popular  `describe` `it` and `expect` syntax as seen here in [src/services/countryCurrencyCodeHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/countryCurrencyCodeHandler.test.js#L17-L26) 
+
+It's important that unit-tests are deterministic (i.e. do not have side-effects) like calling an external API, so we use the use the concept of mocking data, which ensures that when tests run the expected results are `hard coded`, thereby ensuring that tests do not use data that changes over time.  For example base currency rate for USD may be `8.11` today, but tomorrow it could be `8.45`.  An example of mock data may be seen in the test [src/services/serviceHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/serviceHandler.test.js#L11-L22)
+
+
+
 
 ### When you have completed this code pattern, you will understand how to:
 
@@ -34,8 +43,7 @@ a test driven way (aka Red-Green-Refactoring)
 ![design time flow red green refactoring](doc/source/images/red-green-refactoring.jpg)
 
 
-***figure 1: red-green-refactoring***
-
+***figure 1: Red-Green-Refactoring***
 
 1. Pick a story ( e.g. feature request  or bug/issue )
 1. Write a unit-test that represents the story
@@ -68,7 +76,7 @@ This flow is for the runtime of the currency conversion microservice.
 ***figure 2: production flow***
 
 
-1. Consumer calls our  microservice over the internet (http/s request)
+1. Consumer calls the microservice over the internet (http/s request)
 1. ExpressJS `web server`   accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66)
 1. Code routing in Express passes the request to a service module which in turn calls the European Currency Exchange API
 1. An exchange rate for ZAR is retrieved and stored.  The value of 600.66 South African Rands (ZAR) is converted to US Dollars(USD)
@@ -101,7 +109,7 @@ If you want to use mulitple different versions of node which is often required t
 > Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
 
 
-## CI/CD - e.g. Travis or Circle CI
+## CI/CD - e.g. Travis or CircleCI
 
 The unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipeline. If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the `build is not broken`
 
@@ -144,15 +152,10 @@ The currency exchange micro-service uses the following libraries that could cons
 
 
 # Resources
-https://nordicapis.com/using-test-driven-development-for-microservices/
+[Using Test-Driven Development for Microservices by Bill Doerrfeld](https://nordicapis.com/using-test-driven-development-for-microservices/)
 
-# Sample output
 
-![sample_output](doc/source/images/sample_output.png)
 
-# Troubleshooting
-<!-- keep this -->
-sudo root node / npm
 
 ## License
 

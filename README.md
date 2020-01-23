@@ -6,20 +6,9 @@ In this code pattern, we will show you how to create a world class currency conv
 
 TDD is a style of programming that closely intertwines coding, testing, and designing. To illustrate, when designing the functionality of your application, you would write unit-tests first then implement the code afterwards.
 
-We will attempt to use and showcase modern Node.js development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in the [Anatomy of this Application](##anatomy-of-this-application) section at the bottom of this page.
+We will attempt to use and showcase modern Node.js development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
 
 The JavaScript unit-test framework testing library we will use for TDD in this code pattern is [Jest](https://jestjs.io/).
-
-### Unit-tests are the main type of tests on TDD
-There are a number of types of tests in software; however, in TDD, unit-tests are the tests that we are concerned with.  Unit-tests are derived from feature requests or bug fixes and they are written first.  Consequently unit-tests then become self documentation of the system.  
-
-Jest Unit-Tests use the popular  `describe` `it` and `expect` syntax as seen here in [src/services/countryCurrencyCodeHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/countryCurrencyCodeHandler.test.js#L17-L26) 
-
-It's important that unit-tests are deterministic (i.e. do not have side-effects) like calling an external API, so we use the use the concept of mocking data, which ensures that when tests run the expected results are `hard coded`, thereby ensuring that tests do not use data that changes over time.  For example base currency rate for USD may be `8.11` today, but tomorrow it could be `8.45`.  An example of mock data may be seen in the test [src/services/serviceHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/serviceHandler.test.js#L11-L22)
-
-### Code formatting
-As part of this pattern we illustrate linting and formatting NPM scripts are in [package.json](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/package.json#L13-L14)  
-The linter is `eslint` and it can be called by running `npm run lint` and the formatter is prettier and can be run with `npm run format`.  These are not strictly speaking tests, but they do help one to catch syntax errors and format our code more elegantly.
 
 
 ### When you have completed this code pattern, you will understand how to:
@@ -29,6 +18,21 @@ The linter is `eslint` and it can be called by running `npm run lint` and the fo
 * Write test first that break - philosophy
 * Design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitions, by just adding a simple swagger.yaml file!  
 * Use this simple microservice application as a basis to create awesome world class microservices using Node.js and the latest version of JavaScript, ie ECMA Script.
+
+## Unit-tests are the main type of tests on TDD
+There are a number of types of tests in software; however, in TDD, unit-tests are the tests that we are concerned with.  Unit-tests are derived from feature requests or bug fixes and they are written first.  Consequently, unit-tests then become self documentation of the system.  
+
+Jest Unit-Tests use the popular  `describe` `it` and `expect` syntax as seen here in [src/services/countryCurrencyCodeHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/countryCurrencyCodeHandler.test.js#L17-L26) 
+
+It's important that unit-tests are deterministic (i.e. do not have side-effects) like calling an external API, so we use the use the concept of mocking data, which ensures that when tests run the expected results, they are `hard coded`. Thereby ensuring that tests do not use data that changes over time.  For example, the base currency rate for USD may be `8.11` today, but tomorrow it could be `8.45`.  An example of mock data may be seen in the test [src/services/serviceHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/serviceHandler.test.js#L11-L22)
+
+## Code formatting
+As part of this pattern we illustrate linting and formatting NPM scripts are in [package.json](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/package.json#L13-L14)  
+The linter is `eslint` and it can be called by running `npm run lint` and the formatter is `prettier` and can be run with `npm run format`.  These are not strictly speaking tests, but they do help one to catch syntax errors and format our code more elegantly.
+
+## CI/CD - e.g. Travis or CircleCI
+
+The unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipeline as seen [here](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/.travis.yml). If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the `build is not broken`
 
 
 ## Design time Flow
@@ -58,7 +62,7 @@ The name comes from the status of the tests within the cycle. When in the red st
 
 
 # Watch the Video
-### Test Driven Devlopment (TDD) in action
+### Test Driven Development (TDD) in action
 
 See how a bug that surfaced during the actual production of this code base and how we
 fixed it using TDD!
@@ -86,36 +90,6 @@ This flow is for the runtime of the currency conversion microservice.
 1. The ExpressJS `web server` sends a response to the calling Consumer
 with the dollar amount ( e.g. $40.59 )
 
-
-# Steps to run this code pattern
-
-## run locally
-
-1. Clone the repo by running `git clone TDD-NodeJS-Containers`
-1. Ensure [Node.js](https://nodejs.org/en/) 10.16.1 later installed
-by running `node -v`
-
-<details><summary><strong>Recommendation use NVM to run Node</strong></summary>
-Use Node Version Manager(NVM) to control the version of node you use, as the system or installed node may need to change from project to project on your local development environment.
-
-Node Version Manager ([NVM](https://github.com/nvm-sh/nvm))
-allows you to choose and switch which version of node and NPM that suits your project 
-
-If you want to use multiple or different versions of node which is often required these days, NVM will be your friend!
-
-</details>
-
-1. Install packages with NPM by running `npm install`
-1. Start the app by running  `npm start`
-1. Browse the API from your browser `localhost:4001`
-
-> Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
-
-
-## CI/CD - e.g. Travis or CircleCI
-
-The unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipeline. If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the `build is not broken`
-
 ## Anatomy of this Application
 
 The currency exchange micro-service uses the following libraries that could constitute the fabric in creating a modern JavaScript application:
@@ -123,7 +97,7 @@ The currency exchange micro-service uses the following libraries that could cons
 
 ### Design / Development time:
 
-* Jest for `Delightful` Unittesting 
+* Jest for `Delightful` Unit testing 
     * use Jest `mocks` to run unit tests locally without side-effects
         <details><summary>examples of side effects</summary>
             * like calling external services that could have changes or be offline, like other web apis ( e.g. The World Bank currency exchange api our micro service wraps ) 
@@ -154,6 +128,31 @@ The currency exchange micro-service uses the following libraries that could cons
     * by installing the npm package `swagger-ui-express` you can create a REST api with a well documented test harness with almost no effort at all, giving your microservice that professional and polished look as well as a useful way to manually test the API from a swagger html test harness.
 
 
+# Steps to run this code pattern
+
+## run locally
+
+1. Clone the repo by running `git clone TDD-NodeJS-Containers`
+1. Ensure [Node.js](https://nodejs.org/en/) 10.16.1 later installed
+by running `node -v`
+
+<details><summary><strong>Recommendation use NVM to run Node</strong></summary>
+Use Node Version Manager(NVM) to control the version of node you use, as the system or installed node may need to change from project to project on your local development environment.
+
+Node Version Manager ([NVM](https://github.com/nvm-sh/nvm))
+allows you to choose and switch which version of node and NPM that suits your project 
+
+If you want to use multiple or different versions of node which is often required these days, NVM will be your friend!
+
+</details>
+
+1. Install packages with NPM by running `npm install`
+1. Start the app by running  `npm start`
+1. Browse the API from your browser `localhost:4001`
+
+> Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
+
+
 # Resources
 [Using Test-Driven Development for Microservices by Bill Doerrfeld](https://nordicapis.com/using-test-driven-development-for-microservices/)
 
@@ -161,7 +160,7 @@ The currency exchange micro-service uses the following libraries that could cons
 
 
 
-## License
+# License
 
 This code pattern is licensed under the Apache License, Version 2. Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1](https://developercertificate.org/) and the [Apache License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 

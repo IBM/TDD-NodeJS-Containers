@@ -1,6 +1,8 @@
-# Test Driven Development (TDD) in NodeJS and Containers
+[![Build Status](https://travis-ci.com/IBM/TDD-NodeJS-Containers.svg?branch=master)](https://travis-ci.com/IBM/TDD-NodeJS-Containers)
 
-In this code pattern, we will show you how to create a world class currency conversion microservice using Test Driven Development (TDD) using NodeJS and Containers.  This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels)
+# Test Driven Development (TDD) in NodeJS
+
+In this code pattern, we will show you how to create a world class currency conversion microservice using Test Driven Development (TDD) in NodeJS.  This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels)
 
 TDD is a style of programming that closely intertwines coding, testing, and designing. To illustrate, when designing the functionality of your application, you would write unit-tests first then implement the code afterwards.
 
@@ -11,11 +13,10 @@ The JavaScript unit-test framework testing library we will use for TDD in this c
 
 ### When you have completed this code pattern, you will understand how to:
 
-
 * Develop using the Test Driven Development (TDD) methodology 
-* Incorporate tests throughout the development lifecycle - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possilbe even after code changes due to either new feature requests or bug fixes are requeseted or found in QA
-* Write test first that break - philiosophy
-* Design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitons, by just adding a simple swagger.yaml file!  
+* Incorporate tests throughout the development lifecycle - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possible even after code changes due to either new feature requests or bug fixes are requested or found in QA
+* Write test first that break - philosophy
+* Design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitions, by just adding a simple swagger.yaml file!  
 * Use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
 
 
@@ -100,7 +101,7 @@ If you want to use mulitple different versions of node which is often required t
 > Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
 
 
-## CI/CD - Travis ?
+## CI/CD - e.g. Travis or Circle CI
 
 The unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipeline. If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the `build is not broken`
 
@@ -109,7 +110,7 @@ The unit tests that come out of TDD are also an integral part of the CI/CD proce
 The currency exchange micro-service uses the following libraries that could constitute the fabric in creating a modern JavaScript application:
 
 
-###Design / Development time:
+### Design / Development time:
 
 * Jest for `Delightful` Unittesting 
     * use Jest `mocks` to run unit tests locally without side-effects

@@ -1,42 +1,39 @@
-# Code patterns showing Test Driven Development( TDD ) in NodeJS and containers
+# Test Driven Development (TDD) in NodeJS and Containers
 
-In this code pattern, we will show you how to create a world class  currency conversion microservice using Test Driven Development (TDD), NodeJS and Containers.  This see this microservice in context take a look at the [Bee Travels project](https://github.com/bee-travels)
+In this code pattern, we will show you how to create a world class currency conversion microservice using Test Driven Development (TDD) using NodeJS and Containers.  This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels)
 
-TDD is ... way to write code, where you write unit-tests first then implement code afterwards ...
-...
+TDD is a style of programming that closely intertwines coding, testing, and designing. To illustrate, when designing the functionality of your application, you would write unit-tests first then implement the code afterwards.
 
-We will attempt to use and showcase modern NodeJS development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in `Anatomy of this Application` section at the bottom of this page.
+We will attempt to use and showcase modern NodeJS development by using  [ECMA script](http://www.ecma-international.org/ecma-262/6.0/) (2015 ES6 or later) and best NPM libraries - listed in the [Anatomy of this Application](##anatomy-of-this-application) section at the bottom of this page.
 
-The JavaScript unit-test framework testing library we use for TDD is
-[Jest](https://jestjs.io/).
+The JavaScript unit-test framework testing library we will use for TDD in this code pattern is [Jest](https://jestjs.io/).
 
 
 ### When you have completed this code pattern, you will understand how to:
 
 
-* The importance of Test Driven Development (TDD) and how by incorporating tests throughout the development - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possilbe even after code changes due to either new feature requests or bug fixes are requeseted or found in QA
-* write test first that break - philiosophy
-* design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitons, by just adding a simple swagger.yaml file!  
-* How to use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
+* Develop using the Test Driven Development (TDD) methodology 
+* Incorporate tests throughout the development lifecycle - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possilbe even after code changes due to either new feature requests or bug fixes are requeseted or found in QA
+* Write test first that break - philiosophy
+* Design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitons, by just adding a simple swagger.yaml file!  
+* Use this simple microservice application as a basis to create awesome world class microservices using NodeJS and the latest version of ECMA Script
 
 
 ## Design time Flow
+
 It is during coding ( aka Design time ) that TDD is practiced.
 
 ### The Red-Green-Refactor process
 
 The Red-Green-Refactor process is the core part of TDD, without it no other aspect of TDD will function.
 
-The name comes from the status of the tests within the cycle. When in the red state, code does not work.  When in the green state everything is working, but not necessary in the most optimal way.  When in the teal phase we are refactoring phase where we are confident our code is covered with tests and thereby gives us the confidence to change and improve our code.
-
 Figure 1 below showing the steps that typically occur when working in 
-a test driven way ( aka Red-Green-Refactoring)
+a test driven way (aka Red-Green-Refactoring)
 
 ![design time flow red green refactoring](doc/source/images/red-green-refactoring.jpg)
 
 
 ***figure 1: red-green-refactoring***
-
 
 
 1. Pick a story ( e.g. feature request  or bug/issue )
@@ -46,8 +43,9 @@ a test driven way ( aka Red-Green-Refactoring)
 1. Run the test until it passes (GREEN)
 1. Refactor business logic to improve code (TEAL)
 
+The name comes from the status of the tests within the cycle. When in the red state, code does not work.  When in the green state everything is working, but not necessary in the most optimal way.  When in the teal phase we are refactoring phase where we are confident our code is covered with tests and thereby gives us the confidence to change and improve our code.
 
-<!--Optionally, update this section when the video is created-->
+
 # Watch the Video
 ### Test Driven Devlopment (TDD) in action
 
@@ -60,8 +58,14 @@ a test driven way ( aka Red-Green-Refactoring)
 
 
 ## Runtime Flow
+
+This flow is for the runtime of the currency conversion microservice.
+
 ![run time flow](doc/source/images/architecture.jpg)
+
+
 ***figure 2: production flow***
+
 
 1. Consumer calls our  microservice over the internet (http/s request)
 1. ExpressJS `web server`   accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66)
@@ -71,12 +75,11 @@ a test driven way ( aka Red-Green-Refactoring)
 with the dollar amount ( e.g. $40.59 )
 
 
-
-
-
 # Steps to run this code pattern
+
 ## run locally
-1. Clone the repo by running `git clone 
+
+1. Clone the repo by running `git clone TDD-NodeJS-Containers`
 1. Ensure [Node.js](https://nodejs.org/en/) 10.16.1 later installed
 by running `node -v`
 
@@ -92,20 +95,17 @@ If you want to use mulitple different versions of node which is often required t
 
 1. Install packages with NPM by running `npm install`
 1. Start the app by running  `npm start`
-1. Browse the API from your browser `localhost:3000`
+1. Browse the API from your browser `localhost:4001`
 
 > Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
 
 
 ## CI/CD - Travis ?
-the unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipline and will either all pass and integration and deployment will happen, however if test fail the process is halted, thus ensuring the `build is not broken`
 
-
-    
-
-<!--Add a section that explains to the reader what typical output looks like, include screenshots -->
+The unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipeline. If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the `build is not broken`
 
 ## Anatomy of this Application
+
 The currency exchange micro-service uses the following libraries that could constitute the fabric in creating a modern JavaScript application:
 
 

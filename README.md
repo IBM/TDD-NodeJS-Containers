@@ -17,7 +17,9 @@ Jest Unit-Tests use the popular  `describe` `it` and `expect` syntax as seen her
 
 It's important that unit-tests are deterministic (i.e. do not have side-effects) like calling an external API, so we use the use the concept of mocking data, which ensures that when tests run the expected results are `hard coded`, thereby ensuring that tests do not use data that changes over time.  For example base currency rate for USD may be `8.11` today, but tomorrow it could be `8.45`.  An example of mock data may be seen in the test [src/services/serviceHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/serviceHandler.test.js#L11-L22)
 
-
+### Code formatting
+As part of this pattern we illustrate linting and formatting NPM scripts are in [package.json](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/package.json#L13-L14)  
+The linter is `eslint` and it can be called by running `npm run lint` and the formatter is prettier and can be run with `npm run format`.  These are not strictly speaking tests, but they do help one to catch syntax errors and format our code more elegantly.
 
 
 ### When you have completed this code pattern, you will understand how to:
@@ -58,11 +60,11 @@ The name comes from the status of the tests within the cycle. When in the red st
 # Watch the Video
 ### Test Driven Devlopment (TDD) in action
 
-[![video using TDD to add a feature](http://img.youtube.com/vi/Jxi7U7VOMYg/0.jpg)](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
-***Video 1: add a feature***
+See how a bug that surfaced during the actual production of this code base and how we
+fixed it using TDD!
 
-[![video using TDD to fix a bug](http://img.youtube.com/vi/Jxi7U7VOMYg/0.jpg)](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
-***Video 2: fix a bug***
+[![video using TDD to fix a bug]()](https://www.youtube.com/watch?v=pzLJ1cMhnc8)
+***Video 1: fixing a bug with TDD***
 
 
 

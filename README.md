@@ -115,10 +115,11 @@ The currency exchange micro-service uses the following libraries that could cons
     * [ESLint](https://eslint.org/)
         * Find and fix problems in your JavaScript code
 
-* JavaScript Build Compiler
+* JavaScript Build Compiler (explore alt way)
     * [Babel JS](https://babeljs.io/)
-        * Use next generation JavaScript, today
-            * Put ***in*** next-gen(latest and greatest) JavaScript and get cross browser-compatible JavaScript ***out***
+        * Compiler for building
+        * next generation JavaScript
+
 
 * [`rimraf`](https://www.npmjs.com/package/rimraf)
     * Cleanup previous builds and distributions

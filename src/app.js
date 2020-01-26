@@ -4,7 +4,7 @@
 
 import createError from 'http-errors';
 import express from 'express';
-import logger from 'morgan';
+import { errorLoggerMiddleware } from './lib/logger';
 import cors from 'cors';
 import { serve, setup } from 'swagger-ui-express';
 import yaml from 'yamljs';
@@ -21,7 +21,6 @@ var api = '/api/v1';
 
 app.use(cors());
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -37,6 +36,8 @@ app.use('/', serve, setup(swaggerDocument));
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+app.use(errorLoggerMiddleware);
 
 // error handler
 // it must have 4 parameters for Express to know that this is an error middleware

@@ -7,6 +7,7 @@ import NotFoundError from '../errors/NotFoundError';
 
 export const BASE_URL_ENDPOINT = 'https://api.exchangeratesapi.io/';
 
+
 async function getCurrencyExchangeRate(
   countryCurrencyCode,
   baseCode = 'EUR',
@@ -15,11 +16,19 @@ async function getCurrencyExchangeRate(
   if (countryCurrencyCode) {
     var currencyUrl = `${BASE_URL_ENDPOINT}${timeIndicator}?base=${baseCode}`;
 
-    const { data } = await axios.get(currencyUrl);
-    if (data.rates[countryCurrencyCode]) {
-      return data.rates[countryCurrencyCode];
-    } else {
-      throw new NotFoundError(`no country code ${countryCurrencyCode}`);
+    try {
+      const { data } = await axios.get(currencyUrl);
+      if (data.rates[countryCurrencyCode]) {
+        return data.rates[countryCurrencyCode];
+      } else {
+        throw new NotFoundError(`no country code ${countryCurrencyCode}`);
+      }
+    } catch (e) {
+      if (e.response && e.response.status === 400) {
+        throw new NotFoundError(`no country code ${baseCode}`);
+      } else {
+        throw e;
+      }
     }
   }
   throw new NotFoundError(`please provide a currency code`);

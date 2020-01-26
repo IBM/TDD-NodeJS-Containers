@@ -105,7 +105,29 @@ The currency exchange micro-service uses the following libraries that could cons
             * time stamps and random ID generation are non-deterministic, so not good for test data that may be generated on the fly ( mocks really shine here and provide expected reliable values that tests your business logic )
     </details>
 
-    * Hot code reloading (aka On page save hooks) run tests automatically by running `Jest -watch`
+    * Hot code reloading (aka On page save hooks) run tests automatically on save by running `Jest -watch`
+
+* pre-commit hooks
+    * using lint-staged and husky 
+    * to install run:
+    ``` sh
+        npx mrm lint-staged
+    ```
+    
+    you will see the following automatically appended to the `package.json` file
+    ``` json
+        "husky": {
+            "hooks": {
+            "pre-commit": "lint-staged"
+            }
+        },
+        "lint-staged": {
+            "*.js": "eslint --cache --fix",
+            "*.+(js|json)": "prettier --write"
+        }
+    ```
+
+
 
 
 * Code formatting
@@ -118,7 +140,7 @@ The currency exchange micro-service uses the following libraries that could cons
 * JavaScript Build Compiler (explore alt way)
     * [Babel JS](https://babeljs.io/)
         * Compiler for building
-        * next generation JavaScript
+        * next generation JavaScript ( use import export and support of [Optional Chaining](https://v8.dev/features/optional-chaining) )
 
 
 * [`rimraf`](https://www.npmjs.com/package/rimraf)

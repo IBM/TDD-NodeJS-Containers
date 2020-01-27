@@ -26,9 +26,16 @@ Jest Unit-Tests use the popular  `describe` `it` and `expect` syntax as seen her
 
 It's important that unit-tests are deterministic (i.e. do not have side-effects) like calling an external API, so we use the use the concept of mocking data, which ensures that when tests run the expected results, they are `hard coded`. Thereby ensuring that tests do not use data that changes over time.  For example, the base currency rate for USD may be `8.11` today, but tomorrow it could be `8.45`.  An example of mock data may be seen in the test [src/services/serviceHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/serviceHandler.test.js#L11-L22)
 
-## Code formatting
-As part of this pattern we illustrate linting and formatting NPM scripts are in [package.json](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/package.json#L13-L14)  
-The linter is `eslint` and it can be called by running `npm run lint` and the formatter is `prettier` and can be run with `npm run format`.  These are not strictly speaking tests, but they do help one to catch syntax errors and format our code more elegantly.
+## Code formatting and linting
+As part of this pattern we illustrate linting and formatting NPM scripts are in [package.json](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/package.json#L13-L14) 
+
+The linter is `eslint` and it can be called by running `npm run lint` and the formatter is `prettier` and can be run with `npm run format`.   
+
+These are not strictly speaking tests, but they do help one to catch syntax errors and format our code more elegantly.
+
+These are also called with a `Git pre-commit hook`, see the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
+
+
 
 ## CI/CD - e.g. Travis or CircleCI
 
@@ -63,18 +70,27 @@ The name comes from the status of the tests within the cycle. When in the red st
 
 # Watch the Videos
 ### Test Driven Development (TDD) in action
-Begin here. 
+> In the first video see how to setup and run this code pattern.
 
 [video Setup this code-pattern and run it](https://youtu.be/r13OYhwYGa0)
 
 ***Video 1: From git repo to production***
 
-See how a bug that surfaced during the actual production of this code base and how we
+
+> Look at the tooling that enables TDD using Jest unit-tests.  See how to implement a new feature using Red-Green-Refactoring and Test First TDD.
+
+
+[video development tooling and how to use TDD to add a new feature](https://www.youtube.com/watch?v=eDDMFPdh_Ek)
+
+***Video 2: adding a new feature with TDD***
+
+
+> See how a bug that surfaced during the actual production of this code base and how we
 fixed it using TDD!
 
 [video using TDD to fix a bug](https://www.youtube.com/watch?v=pzLJ1cMhnc8)
 
-***Video 2: fixing a bug with TDD***
+***Video 3: fixing a bug with TDD***
 
 
 
@@ -112,14 +128,30 @@ The currency exchange micro-service uses the following libraries that could cons
 
     * Hot code reloading (aka On page save hooks) run tests automatically on save by running `Jest -watch`
 
-* Git pre-commit hooks ( every time you run `git commit ...` both the linter and formatter will run ) If for example you have extra spaces in your code like `const planet = " Saturn      ";` the linter will automattically clean up the code and format it correctly to be `const planet = "Saturn";`.  This newly formatted code is then commited and can be pushed.  However say you have a syntax error, for example `cnst planet = "Saturn";` the commit will fail as the symbol cnst is invalid.  You will see informative output in your console as seen in  figure 3 below.  Once you have manually corrected the syntax error you can re commit it until it passes.
+* Winston for Logging
+    * a best practice is to have a logging framework to extract good errors from your application, as console.log is not always going to be sufficeint
+    * use a callback to illustrate this as seen here in the [code](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/lib/logger.js).
+    * [Winston](https://www.npmjs.com/package/winston) is a great simple to use logging framework, and is used in conjuction with winston-express.
 
-![pre-commit-hook-syntax-error-csnt-const](doc/src/images/pre-commit-hook-syntax-error-csnt-const.jpg)
-*** figure 3. Syntax error caught by Git pre-commit hooks with a linter and formatter***
+* Code formatting
+    * Prettier 
+
+* JavaScript syntax checking
+    * [ESLint](https://eslint.org/)
+        * Find and fix problems in your JavaScript code
+
+
+* Git pre-commit hooks ( every time you run `git commit ...` both the linter and formatter will run ) If for example you have extra spaces in your code like `const planet = " Saturn      ";` the formatter will automatically clean up the code and format it correctly to be `const planet = "Saturn";`.  This newly formatted code is then commited and can be pushed.  However say you have a syntax error, for example `cnst planet = "Saturn";` the commit will fail as the symbol `cnst` is invalid.  You will see informative output in your console as seen in figure 3 below.  Once you have manually corrected the syntax error you can re-commit it until syntax is correct and the linter passes.
+
+
+![Git pre-commit hooks](./doc/source/images/pre-commit-hook-syntax-error-csnt-const.jpg)
+
+***Figure 3. Syntax error caught by Git pre-commit hooks with both linter 1 (eslint) and formatter 2 (prettier)***
 
 
 
-    * this is achieved with the two `npm` libraries `lint-staged` and `husky` , which are installed by running:
+    * this is achieved with the two `npm` libraries `lint-staged` and `husky` , which are installed by running `npx` as such:
+
     ``` sh
         npx mrm lint-staged
     ```
@@ -137,21 +169,10 @@ The currency exchange micro-service uses the following libraries that could cons
         }
     ```
 
-
-
-
-* Code formatting
-    * Prettier 
-
-* JavaScript syntax checking
-    * [ESLint](https://eslint.org/)
-        * Find and fix problems in your JavaScript code
-
-* JavaScript Build Compiler (explore alt way)
+* JavaScript Transpiler 
     * [Babel JS](https://babeljs.io/)
-        * Compiler for building
-        * next generation JavaScript ( use import export and support of [Optional Chaining](https://v8.dev/features/optional-chaining) )
-
+        * Transpiler - so you can use next generation JavaScript now (e.g. Modules, Import Export and support of [Optional Chaining](https://v8.dev/features/optional-chaining) )
+        * Native support for modern javascript is expected in node v13.2 or later, and transpilation will no longer be needed.
 
 * [`rimraf`](https://www.npmjs.com/package/rimraf)
     * Cleanup previous builds and distributions

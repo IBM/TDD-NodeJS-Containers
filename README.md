@@ -61,15 +61,20 @@ a test driven way (aka Red-Green-Refactoring)
 The name comes from the status of the tests within the cycle. When in the red state, code does not work.  When in the green state everything is working, but not necessary in the most optimal way.  When in the teal phase we are refactoring phase where we are confident our code is covered with tests and thereby gives us the confidence to change and improve our code.
 
 
-# Watch the Video
+# Watch the Videos
 ### Test Driven Development (TDD) in action
+Begin here. 
+
+[video Setup this code-pattern and run it](https://youtu.be/r13OYhwYGa0)
+
+***Video 1: From git repo to production***
 
 See how a bug that surfaced during the actual production of this code base and how we
 fixed it using TDD!
 
 [video using TDD to fix a bug](https://www.youtube.com/watch?v=pzLJ1cMhnc8)
 
-***Video 1: fixing a bug with TDD***
+***Video 2: fixing a bug with TDD***
 
 
 

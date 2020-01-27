@@ -112,7 +112,7 @@ The currency exchange micro-service uses the following libraries that could cons
 
     * Hot code reloading (aka On page save hooks) run tests automatically on save by running `Jest -watch`
 
-* Winstron for Logging
+* Winston for Logging
     * a best practice is to have a logging framework to extract good errors from your application, as console.log is not always going to be sufficeint
     * use a callback to illustrate this as seen here in the [code](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/lib/logger.js).
     * [Winston](https://www.npmjs.com/package/winston) is a great simple to use logging framework, and is used in conjuction with winston-express.

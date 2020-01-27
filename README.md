@@ -114,7 +114,7 @@ The currency exchange micro-service uses the following libraries that could cons
 
 * Winstron for Logging
     * a best practice is to have a logging framework to extract good errors from your application, as console.log is not always going to be sufficeint
-    * use a callback to illustrate this as seen here in the code.
+    * use a callback to illustrate this as seen here in the [code](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/lib/logger.js).
     * [Winston](https://www.npmjs.com/package/winston) is a great simple to use logging framework, and is used in conjuction with winston-express.
 
 * Git pre-commit hooks ( every time you run `git commit ...` both the linter and formatter will run ) If for example you have extra spaces in your code like `const planet = " Saturn      ";` the formatter will automatically clean up the code and format it correctly to be `const planet = "Saturn";`.  This newly formatted code is then commited and can be pushed.  However say you have a syntax error, for example `cnst planet = "Saturn";` the commit will fail as the symbol `cnst` is invalid.  You will see informative output in your console as seen in figure 3 below.  Once you have manually corrected the syntax error you can re-commit it until syntax is correct and the linter passes.

@@ -112,9 +112,14 @@ The currency exchange micro-service uses the following libraries that could cons
 
     * Hot code reloading (aka On page save hooks) run tests automatically on save by running `Jest -watch`
 
-* pre-commit hooks
-    * using lint-staged and husky 
-    * to install run:
+* Git pre-commit hooks ( every time you run `git commit ...` both the linter and formatter will run ) If for example you have extra spaces in your code like `const planet = " Saturn      ";` the linter will automattically clean up the code and format it correctly to be `const planet = "Saturn";`.  This newly formatted code is then commited and can be pushed.  However say you have a syntax error, for example `cnst planet = "Saturn";` the commit will fail as the symbol cnst is invalid.  You will see informative output in your console as seen in  figure 3 below.  Once you have manually corrected the syntax error you can re commit it until it passes.
+
+![pre-commit-hook-syntax-error-csnt-const](doc/src/images/pre-commit-hook-syntax-error-csnt-const.jpg)
+*** figure 3. Syntax error caught by Git pre-commit hooks with a linter and formatter***
+
+
+
+    * this is achieved with the two `npm` libraries `lint-staged` and `husky` , which are installed by running:
     ``` sh
         npx mrm lint-staged
     ```

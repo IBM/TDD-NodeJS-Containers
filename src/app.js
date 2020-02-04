@@ -4,7 +4,7 @@
 
 import createError from 'http-errors';
 import express from 'express';
-import { errorLoggerMiddleware } from './lib/logger';
+import pino from 'express-pino-logger';
 import cors from 'cors';
 import { serve, setup } from 'swagger-ui-express';
 import yaml from 'yamljs';
@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.use(errorLoggerMiddleware);
+app.use(pino);
 
 // error handler
 // it must have 4 parameters for Express to know that this is an error middleware

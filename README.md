@@ -1,162 +1,148 @@
 [![Build Status](https://travis-ci.com/IBM/TDD-NodeJS-Containers.svg?branch=master)](https://travis-ci.com/IBM/TDD-NodeJS-Containers)
 
-# Test Driven Development (TDD) in Node.js
+# Test-driven development (TDD) in Node.js
 
-In this code pattern, we will show you how to create a world class currency conversion microservice using Test Driven Development (TDD) in Node.js.  This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels)
+This code pattern shows you how to create a world class currency conversion microservice using test-driven development (TDD) in Node.js. This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels)
 
-TDD is a style of programming that closely intertwines coding, testing, and designing. To illustrate, when designing the functionality of your application, you would write unit-tests first then implement the code afterwards.
+TDD is a style of programming that closely intertwines coding, testing, and designing. So, when designing the functionality of your application, you first write unit tests and then implement the code afterwards.
 
-We will attempt to use and showcase modern Node.js development by using Modern JavaScript [ECMA script](http://www.ecma-international.org/ecma-262/) and popular NPM libraries - listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
+This pattern showcases modern Node.js development by using modern JavaScript [ECMA script](http://www.ecma-international.org/ecma-262/) and popular NPM libraries, which you can see are listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
 
-The JavaScript unit-test framework testing library we will use for TDD in this code pattern is [Jest](https://jestjs.io/).
+Specifically, we use [Jest](https://jestjs.io/), a JavaScript unit-test framework testing library that works well with TDD.
 
+## After completing this code pattern, you will understand how to:
 
-### When you have completed this code pattern, you will understand how to:
+* Develop applications using the test-driven development (TDD) methodology. <!--EM: I think this one bullet encapsulates the following 2 bullets as well, so I recommend deleting them.
+* Incorporate tests throughout the development lifecycle - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possible even after code changes due to either new feature requests or bug fixes are requested or found in QA 
+* Write test first that break - philosophy-->
+* Design and create a microservice with a REST interface that is documented with a test harness included in a swagger.yaml file.
+* Use this simple microservice application as a basis to create microservices using Node.js and ECMA Script.
 
-* Develop using the Test Driven Development (TDD) methodology 
-* Incorporate tests throughout the development lifecycle - deploy lifecycle will make your life easier, coding fun and be confident that your application will run as best as possible even after code changes due to either new feature requests or bug fixes are requested or found in QA
-* Write test first that break - philosophy
-* Design and create a microservice with a REST interface that is documented with a test harness automatically provided by OpenAPI connect aka [Swagger](https://swagger.io/) definitions, by just adding a simple swagger.yaml file!  
-* Use this simple microservice application as a basis to create awesome world class microservices using Node.js and the latest version of JavaScript, ie ECMA Script.
+## Quick review of unit test
 
-## Unit-tests are the main type of tests on TDD
-There are a number of types of tests in software; however, in TDD, unit-tests are the tests that we are concerned with.  Unit-tests are derived from feature requests or bug fixes and they are written first.  Consequently, unit-tests then become self documentation of the system.  
+Test driven development uses unit tests. A unit test is written in response to a feature request or bug fix, and they are written before the code is developed fully. Consequently, unit tests become documentation of the system itself.  
 
-Jest Unit-Tests use the popular  `describe` `it` and `expect` syntax as seen here in [src/services/countryCurrencyCodeHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/countryCurrencyCodeHandler.test.js#L17-L26) 
+Jest unit tests use the popular `describe`, `it`, and `expect` syntax, as seen here: [src/services/countryCurrencyCodeHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/countryCurrencyCodeHandler.test.js#L17-L26) 
 
-It's important that unit-tests are deterministic (i.e. do not have side-effects) like calling an external API, so we use the use the concept of mocking data, which ensures that when tests run the expected results, they are `hard coded`. Thereby ensuring that tests do not use data that changes over time.  For example, the base currency rate for USD may be `8.11` today, but tomorrow it could be `8.45`.  An example of mock data may be seen in the test [src/services/serviceHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/serviceHandler.test.js#L11-L22)
+It's important that unit tests are deterministic, or, in other words, don't have side effects. One way to ensure that is to use the concept of mocking data, which ensures that tests results are hard coded, so that the data doesn't change over time. For example, the base currency rate for USD may be `8.11` today, but tomorrow it could be `8.45`. Using mock data ensures that you're using data that doesn't change; an example of mock data may be seen in the test [src/services/serviceHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/serviceHandler.test.js#L11-L22)
 
 ## Code formatting and linting
-As part of this pattern we illustrate linting and formatting NPM scripts are in [package.json](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/package.json#L13-L14) 
 
-The linter is `eslint` and it can be called by running `npm run lint` and the formatter is `prettier` and can be run with `npm run format`.   
+This patterns shows linting and formatting NPM scripts in [package.json](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/package.json#L13-L14) 
 
-These are not strictly speaking tests, but they do help one to catch syntax errors and format our code more elegantly.
+The linter is `eslint`. You can call it by running `npm run lint`. You can use the `prettier` formatter which can be run with `npm run format`.   
 
-These are also called with a `Git pre-commit hook`, see the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
+These are not strictly speaking tests, but they do help you to catch syntax errors and format elegant code.
 
+You can also call these NPM scripts with a `Git pre-commit hook` as shown in the [Anatomy of this Application](#anatomy-of-this-application) section.
 
+## Continuous integration/continuous delivery using Travis or CircleCI
 
-## CI/CD - e.g. Travis or CircleCI
+The unit tests that come out of TDD are also an integral part of the continuous integration/continuous delivery (CI/CD) process.  The tests are run in the deployment pipeline as you can see [here](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/.travis.yml). If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the `build is not broken`.
 
-The unit tests that come out of TDD are also an integral part of the CI/CD process.  The tests are run in the deployment pipeline as seen [here](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/.travis.yml). If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the `build is not broken`
+## Design time flow
 
-
-## Design time Flow
-
-It is during coding ( aka Design time ) that TDD is practiced.
+Now that we've reviewed some basic concepts of TDD, let's look at how it works during the coding process (also known as the desing time).
 
 ### The Red-Green-Refactor process
 
-The Red-Green-Refactor process is the core part of TDD, without it no other aspect of TDD will function.
+The Red-Green-Refactor process is the core part of TDD &mdash; without it no other aspect of TDD will function.
 
-Figure 1 below showing the steps that typically occur when working in 
-a test driven way (aka Red-Green-Refactoring)
+Figure 1 shows a typic TDD workflow. We sometimes call this workflow Red-Green-Refactoring.
 
 ![design time flow red green refactoring](doc/source/images/red-green-refactoring.jpg)
 
 
-***figure 1: Red-Green-Refactoring***
+***Figure 1. Red-Green-Refactoring***
 
-1. Pick a story ( e.g. feature request  or bug/issue )
-1. Write a unit-test that represents the story
-1. Run the test, it will fail (RED)
-1. Implement business logic towards making this test to pass
-1. Run the test until it passes (GREEN)
-1. Refactor business logic to improve code (TEAL)
+1. Pick a story ( for example, a feature request or bug/issue ).
+1. Write a unit test that represents the story.
+1. Run the test. It will fail (RED).
+1. Implement business logic towards making the test pass.
+1. Change the code and run the test until it passes (GREEN).
+1. Refactor business logic to improve code (TEAL).
 
-The name comes from the status of the tests within the cycle. When in the red state, code does not work.  When in the green state everything is working, but not necessary in the most optimal way.  When in the teal phase we are refactoring phase where we are confident our code is covered with tests and thereby gives us the confidence to change and improve our code.
+The Red-Green-Refactoring name comes from the status of the tests within the cycle. 
+* The red phase indicates that code does not work.  
+* The green phase indicates that everything is working, but not necessary in the most optimal way.
+* The teal phase indicates that the tester is refactoring the code, but is confident their code is covered with tests which gives the tester confidence to change and improve our code.
 
 
-# Watch the Videos
+## Watch the videos
+
 ### Test Driven Development (TDD) in action
-> In the first video see how to setup and run this code pattern.
+> In the first video see how to set up and run this code pattern.
 
 [video Setup this code-pattern and run it](https://youtu.be/r13OYhwYGa0)
 
 ***Video 1: From git repo to production***
 
-
-> Look at the tooling that enables TDD using Jest unit-tests.  See how to implement a new feature using Red-Green-Refactoring and Test First TDD.
-
+> Look at the tooling that enables TDD using Jest unit tests.  See how to implement a new feature using Red-Green-Refactoring and test first TDD.
 
 [video development tooling and how to use TDD to add a new feature](https://www.youtube.com/watch?v=eDDMFPdh_Ek)
 
-***Video 2: adding a new feature with TDD***
+***Video 2: Adding a new feature with TDD***
 
-
-> See how a bug that surfaced during the actual production of this code base and how we
-fixed it using TDD!
+> See how we fixed a bug that surfaced during the actual production of this code base.
 
 [video using TDD to fix a bug](https://www.youtube.com/watch?v=pzLJ1cMhnc8)
 
-***Video 3: fixing a bug with TDD***
+***Video 3. Fixing a bug with TDD***
 
 
-
-## Runtime Flow
+## Runtime flow
 
 This flow is for the runtime of the currency conversion microservice.
 
 ![run time flow](doc/source/images/architecture.jpg)
 
 
-***figure 2: production flow***
+***Figure 2. Production flow***
 
+1. Consumer calls the microservice over the internet (http/s request).
+1. ExpressJS `web server` accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66).
+1. Code routing in Express passes the request to a service module which in turn calls the European Currency Exchange API.
+1. An exchange rate for ZAR is retrieved and stored. The value of 600.66 South African Rands (ZAR) is converted to US Dollars(USD).
+1. The ExpressJS `web server` sends a response to the calling consumer with the dollar amount (in this case, $40.59 ).
 
-1. Consumer calls the microservice over the internet (http/s request)
-1. ExpressJS `web server`  accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66)
-1. Code routing in Express passes the request to a service module which in turn calls the European Currency Exchange API
-1. An exchange rate for ZAR is retrieved and stored.  The value of 600.66 South African Rands (ZAR) is converted to US Dollars(USD)
-1. The ExpressJS `web server` sends a response to the calling Consumer
-with the dollar amount ( e.g. $40.59 )
+## Anatomy of this application
 
-## Anatomy of this Application
+The currency exchange microservice uses the following libraries that can help you create a modern JavaScript application:
 
-The currency exchange micro-service uses the following libraries that could constitute the fabric in creating a modern JavaScript application:
-
-
-### Design / Development time:
-
-* Jest for `Delightful` Unit testing 
-    * use Jest `mocks` to run unit tests locally without side-effects
-        <details><summary>examples of side effects</summary>
-            * like calling external services that could have changes or be offline, like other web apis ( e.g. The World Bank currency exchange api our micro service wraps ) 
-            * external databases that could be in-flux or even down as well
-            * time stamps and random ID generation are non-deterministic, so not good for test data that may be generated on the fly ( mocks really shine here and provide expected reliable values that tests your business logic )
-    </details>
-
+* **Jest for `Delightful` unit testing** <!--EM: Why is Delightful in code?-->
+    * use Jest `mocks` to run unit tests locally without side effects. Examples of side effects include:
+          * Calling external services (like other Web APIs) that are changed or offline; for example, the World Bank currency exchange API that our microservice wraps.
+          * Calling external databases that are in-flux or down
+          * Using time stamps and random ID generation that are non-deterministic, so they're not good for test data that may be generated on the fly (Mocks really shine here and provide expected reliable values that tests your business logic).
     * Hot code reloading (aka On page save hooks) run tests automatically on save by running `Jest -watch`
 
-* Winston for Logging
+* **Winston for logging**
     * a best practice is to have a logging framework to extract good errors from your application, as console.log is not always going to be sufficeint
-    * use a callback to illustrate this as seen here in the [code](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/lib/logger.js).
+    * use a callback to illustrate. See the [code](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/lib/logger.js) to see it in action. 
     * [Winston](https://www.npmjs.com/package/winston) is a great simple to use logging framework, and is used in conjuction with winston-express.
 
-* Code formatting
+* **Code formatting**
     * Prettier 
 
-* JavaScript syntax checking
-    * [ESLint](https://eslint.org/)
-        * Find and fix problems in your JavaScript code
+* **JavaScript syntax checking**
+    * [ESLint](https://eslint.org/) helps you find and fix problems in your JavaScript code.
 
-
-* Git pre-commit hooks ( every time you run `git commit ...` both the linter and formatter will run ) If for example you have extra spaces in your code like `const planet = " Saturn      ";` the formatter will automatically clean up the code and format it correctly to be `const planet = "Saturn";`.  This newly formatted code is then commited and can be pushed.  However say you have a syntax error, for example `cnst planet = "Saturn";` the commit will fail as the symbol `cnst` is invalid.  You will see informative output in your console as seen in figure 3 below.  Once you have manually corrected the syntax error you can re-commit it until syntax is correct and the linter passes.
-
+* **Git pre-commit hooks**
+    Every time you run `git commit ...` both the linter and formatter will run. If, for example, you have extra spaces in your code like `const planet = " Saturn      ";`, the formatter automatically cleans up the code and formats it correctly to be `const planet = "Saturn";`. This newly formatted code is then committed and can be pushed. However, say you have a syntax error, for example `cnst planet = "Saturn";`, the commit will fail as the symbol `cnst` is invalid. You will see informative output in your console as Figure 3 shows. Once you have manually corrected the syntax error, you can recommit it until the syntax is correct and the linter passes.
 
 ![Git pre-commit hooks](./doc/source/images/pre-commit-hook-syntax-error-csnt-const.jpg)
 
 ***Figure 3. Syntax error caught by Git pre-commit hooks with both linter 1 (eslint) and formatter 2 (prettier)***
 
 
-
-    * this is achieved with the two `npm` libraries `lint-staged` and `husky` , which are installed by running `npx` as such:
+   This is achieved with the two `npm` libraries `lint-staged` and `husky`, which are installed by running `npx` as such:
 
     ``` sh
         npx mrm lint-staged
     ```
     
-    you will see the following automatically appended to the `package.json` file
+   You will see the following automatically appended to the `package.json` file:
+    
     ``` json
         "husky": {
             "hooks": {
@@ -169,40 +155,28 @@ The currency exchange micro-service uses the following libraries that could cons
         }
     ```
 
-* JavaScript Transpiler 
+* **JavaScript Transpiler**  
     * [Babel JS](https://babeljs.io/)
-        * Transpiler - so you can use next generation JavaScript now (e.g. Modules, Import Export and support of [Optional Chaining](https://v8.dev/features/optional-chaining) )
-        * Native support for modern javascript is expected in node v13.2 or later, and transpilation will no longer be needed.
+          * You need a transpiler so you can use the latest JavaScript now (for example, Modules, `import` `export`, and support of [Optional Chaining](https://v8.dev/features/optional-chaining)).
+          * Native support for modern JavaScript is expected in Node.js v13.2 or later, and transpilation will no longer be needed.
 
 * [`rimraf`](https://www.npmjs.com/package/rimraf)
     * Cleanup previous builds and distributions
         * rimraf is The UNIX command `rm -rf` for ***node***
 
-* `swagger` 
-    * by installing the npm package `swagger-ui-express` you can create a REST api with a well documented test harness with almost no effort at all, giving your microservice that professional and polished look as well as a useful way to manually test the API from a swagger html test harness.
-
+* **`swagger`**
+    * Installing the npm package `swagger-ui-express` lets you create a REST API with a well-documented test harness with almost no effort at all, giving your microservice that professional and polished look as well as a useful way to manually test the API from a swagger html test harness.
 
 # Steps to run this code pattern
 
-## run locally
+## Run the code locally
 
-1. Clone the repo by running `git clone TDD-NodeJS-Containers`
-1. Ensure [Node.js](https://nodejs.org/en/) 10.16.1 later installed
-by running `node -v`
-
-<details><summary><strong>Recommendation use NVM to run Node</strong></summary>
-Use Node Version Manager(NVM) to control the version of node you use, as the system or installed node may need to change from project to project on your local development environment.
-
-Node Version Manager ([NVM](https://github.com/nvm-sh/nvm))
-allows you to choose and switch which version of node and NPM that suits your project 
-
-If you want to use multiple or different versions of node which is often required these days, NVM will be your friend!
-
-</details>
-
-1. Install packages with NPM by running `npm install`
-1. Start the app by running  `npm start`
-1. Browse the API from your browser `localhost:4001`
+1. Clone the repo by running `git clone TDD-NodeJS-Containers`.
+1. Ensure [Node.js](https://nodejs.org/en/) 10.16.1 or later is installed
+by running `node -v`. We recommend using [Node Version Manager(NVM)](https://github.com/nvm-sh/nvm) to control the version of Node you use, as the system or installed Node.js version may need to change from project to project on your local development environment. NVM allows you to choose and switch which version of node and NPM that suits your project 
+1. Install packages with NPM by running `npm install`.
+1. Start the app by running  `npm start`.
+1. Browse the API from your browser `localhost:4001`.
 
 > Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
 
@@ -213,7 +187,6 @@ If you want to use multiple or different versions of node which is often require
 [Test-Driven Java Development, Second Edition: Invoke TDD principles for end-to-end application development, 2nd Edition by Farcic, Viktor](https://www.amazon.com/Test-Driven-Java-Development-Viktor-Farcic-ebook/dp/B00YSIM3SC)
 
 [Blog on colocaton of unit-tests by Kent Dodds](https://kentcdodds.com/blog/colocation)
-
 
 
 # License

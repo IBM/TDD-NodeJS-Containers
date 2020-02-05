@@ -55,6 +55,8 @@ paths:
       responses:
         '200':
           description: Successfully got currency name and 3 character currency code data
+        '400':
+          description: Currency amount should be numeric
         '404':
           description: Currency code not found
         '500':

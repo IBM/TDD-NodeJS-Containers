@@ -40,21 +40,26 @@ router.post(
 
 /* GET
 /currency/{currencyFromAmount}/{currencyFromCode}/{currencyToCode}:
+ check if 
+ /currency/10/EUR/USD
+ can be
+ /currency?amount=10&from=EUR&to=USD
 */
 router.get(
   '/:currencyFromAmount/:currencyFromCode/:currencyToCode',
   asyncMiddleware(async (req, res) => {
     const { currencyFromAmount, currencyFromCode, currencyToCode } = req.params;
-
+    //req.log.info("about to convert to currency")
+    if (isNaN(parseFloat(currencyFromCode))) {
+      return res.status(400).json({ error: 'currency from amount should be numeric' });
+    }
     const data = await convertCurrency(
       parseFloat(currencyFromAmount.trim()),
       currencyFromCode.trim(),
       currencyToCode.trim(),
       'latest'
     );
-    
-    console.log(data);
-    
+
     return res.json({ result: data });
   })
 );

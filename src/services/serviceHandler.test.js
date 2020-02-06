@@ -34,7 +34,9 @@ describe('Expect non empty list of 32 for all currency exchange rates', () => {
 describe('Get a specific rate for a specific country code that does not exist, i.e. USA', () => {
   it('should throw an error', async () => {
     jest.spyOn(axios, 'get').mockResolvedValueOnce(ratesMock);
-    await expect(getCurrencyExchangeRate('XYZ')).rejects.toThrow('no country code XYZ');
+    await expect(getCurrencyExchangeRate('XYZ')).rejects.toThrow(
+      'The country code XYZ is invalid for the currency you want to convert TO.'
+    );
   });
 });
 

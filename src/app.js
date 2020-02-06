@@ -4,7 +4,8 @@
 
 import createError from 'http-errors';
 import express from 'express';
-import { errorLoggerMiddleware } from './lib/logger';
+import logger from './lib/logger';
+import expressPino from 'express-pino-logger';
 import cors from 'cors';
 import { serve, setup } from 'swagger-ui-express';
 import yaml from 'yamljs';
@@ -18,6 +19,9 @@ swaggerDocument.schemes = [scheme];
 
 var app = express();
 var api = '/api/v1';
+
+const expressLogger = expressPino({ logger });
+app.use(expressLogger);
 
 app.use(cors());
 
@@ -37,12 +41,11 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.use(errorLoggerMiddleware);
-
 // error handler
 // it must have 4 parameters for Express to know that this is an error middleware
 // eslint-disable-next-line no-unused-vars
 app.use(function(err, req, res, next) {
+  logger.error(err);
   if (err instanceof NotFoundError) {
     return res.status(404).json({ error: err.message });
   }

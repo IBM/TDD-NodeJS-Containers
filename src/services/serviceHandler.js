@@ -4,15 +4,15 @@
  */
 import axios from 'axios';
 import NotFoundError from '../errors/NotFoundError';
-
 export const BASE_URL_ENDPOINT = 'https://api.exchangeratesapi.io/';
-
 
 async function getCurrencyExchangeRate(
   countryCurrencyCode,
   baseCode = 'EUR',
   timeIndicator = 'latest'
 ) {
+  countryCurrencyCode = countryCurrencyCode.toUpperCase();
+  baseCode = baseCode.toUpperCase();
   if (countryCurrencyCode) {
     var currencyUrl = `${BASE_URL_ENDPOINT}${timeIndicator}?base=${baseCode}`;
 
@@ -21,11 +21,17 @@ async function getCurrencyExchangeRate(
       if (data.rates[countryCurrencyCode]) {
         return data.rates[countryCurrencyCode];
       } else {
-        throw new NotFoundError(`no country code ${countryCurrencyCode}`);
+        //currencyToCode is invalid
+        throw new NotFoundError(
+          `The country code ${countryCurrencyCode} is invalid for the currency you want to convert TO.`
+        );
       }
     } catch (e) {
       if (e.response && e.response.status === 400) {
-        throw new NotFoundError(`no country code ${baseCode}`);
+        //currencyFromCode is invalid
+        throw new NotFoundError(
+          `The country code ${baseCode} is invalid for the currency you want to convert FROM.`
+        );
       } else {
         throw e;
       }

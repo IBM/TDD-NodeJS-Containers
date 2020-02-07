@@ -157,6 +157,7 @@ docker build -t $DOCKERHUB_USERNAME/currencyexchange:latest .
 ```
 
 <details><summary><strong>Expected output details</strong></summary>
+
 ![detailed output from docker build](./doc/source/images/docker-build-output.png)
 
 </details>
@@ -177,6 +178,7 @@ If you still see images for `currencyexchange` confirm this by running:
 ```bash
 docker images -a |  grep "currencyexchange"
 ```
+
 ![docker images](./doc/source/images/docker-images-grep.png)
 
 Do you doubt that this was the latest build? Its timestamp is 12 hours ago, so it's probably not the latest. You can delete that image by running:

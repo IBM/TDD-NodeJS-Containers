@@ -1,0 +1,30 @@
+---
+version: '3.3'
+
+services:
+  mongo:
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    image: mongo
+    restart: always
+
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    depends_on:
+      - mongo
+
+  ui:
+    build: web/worklog
+    ports:
+      - "3000:3000"
+    depends_on:
+      - web
+    environment:
+      - REACT_APP_APP_SERVER=http://localhost:5000
+
+

@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: currencyexchange-ingress
+spec:
+  rules:
+    - host: currencyexchange.gsteinfeld-kn.us-east.containers.appdomain.cloud
+      http:
+          paths:
+            - backend:
+                serviceName: currencyexchange-api
+                servicePort: 4001 
+

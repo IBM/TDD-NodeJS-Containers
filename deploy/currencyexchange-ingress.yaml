@@ -1,12 +1,23 @@
-apiVersion: networking.k8s.io/v1beta1
+---
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: currencyexchange-ingress
+  annotations:
+    ingress.bluemix.net/redirect-to-https: "True"
+  name: ingress-currencyexchange
 spec:
+  tls:
+    - hosts:
+        - <INGRESS_SUBDOMAIN>
+      secretName: <INGRESS_SECRET>
+  backend:
+    serviceName: currencyexchange-service
+    servicePort: 4001
   rules:
-    - host: currencyexchange.gsteinfeld.us-east.containers.appdomain.cloud
+    - host: <INGRESS_SUBDOMAIN>
       http:
-          paths:
-            - backend:
-                serviceName: currencyexchange-api
-                servicePort: 4001 
+        paths:
+          - path: /
+            backend:
+              serviceName: currencyexchange-service
+              servicePort: 4001

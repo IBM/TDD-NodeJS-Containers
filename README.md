@@ -28,9 +28,9 @@ This flow is for the runtime of the currency conversion microservice.
 
 ***Figure 1. Production flow***
 
-1. Consumer calls the microservice over the internet (http/s request).
+1. Client API Consumer calls the microservice over the internet (http/s request).
 1. ExpressJS `web server` accepts the REST request (e.g. GET /convertCurrency/ZAR/USD/600.66).
-1. Code routing in Express passes the request to a service module which in turn calls the European Currency Exchange API.
+1. Code routing in Express passes the request to a service module which in turn calls the External European Currency Exchange API (http://api.exchangeratesapi.io).
 1. An exchange rate for ZAR is retrieved and stored. The value of 600.66 South African Rands (ZAR) is converted to US Dollars(USD).
 1. The ExpressJS `web server` sends a response to the calling consumer with the dollar amount (in this case, $40.59 ).
 

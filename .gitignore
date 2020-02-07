@@ -5,7 +5,6 @@ package-lock.json
 .eslintcache
 
 .DS_Store
-*.png
 *.gif
 *.psd
 *.xlsx

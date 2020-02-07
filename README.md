@@ -153,7 +153,7 @@ cd TDD-NodeJS-Containers
 
 ```bash
 export DOCKERHUB_USERNAME=<your-dockerhub-username>
-docker build -t $DOCKERHUB_USERNAME/currencyexchange:latest .
+docker build -t $DOCKERHUB_USERNAME/currencyexchange:v0.0.1 .
 ```
 
 <details><summary><strong>Expected output details</strong></summary>
@@ -229,7 +229,54 @@ docker push $DOCKERHUB_USERNAME/currencyexchange:v0.0.1
 
 ```
 
-Provision the [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service) and follow the set of instructions for creating a container and cluster based on your cluster type, `Standard` vs `Lite`.
+2. Provision the [IBM Cloud Kubernetes Service](https://cloud.ibm.com/kubernetes/catalog/cluster) and follow the set of instructions for creating a Container and Cluster based on your cluster type, `Standard` vs `Lite`.
+
+* Login to the IBM Cloud using the [Developer Tools CLI](https://www.ibm.com/cloud/cli):
+> NOTE use `--sso` if you have a single sign on account, or delete for username/password login
+
+```bash
+ibmcloud login --sso
+```
+
+* Set the Kubernetes environment to work with your cluster:
+
+```bash
+ibmcloud cs cluster-config $CLUSTER_NAME
+```
+
+The output of this command will contain a KUBECONFIG environment variable that must be exported in order to set the context. Copy and paste the output in the terminal window. An example is:
+
+```bash
+export KUBECONFIG=/home/rak/.bluemix/plugins/container-service/clusters/Kate/kube-config-prod-dal10-<cluster_name>.yml
+```
+
+
+#### Standard Cluster Instructions
+
+3. Run `ibmcloud cs cluster-get <CLUSTER_NAME>` and locate the `Ingress Subdomain` and `Ingress Secret`. This is the domain of the URL that is to be used to access the Data Service and UI on the Cloud. 
+
+
+
+In addition, update the `host` and `secretName` in [currencyexchange-ingress.yaml](currencyexchange-ingress.yaml)
+
+
+
+4. To deploy the services to the IBM Cloud Kubernetes Service, run:
+
+```bash
+
+kubectl apply -f ./deploy/currencyexchange-deploy.yaml
+
+
+## Confirm the services are running - this may take a minute
+kubectl get pods
+
+## Update protocol being used to https
+kubectl apply -f ./deploy/currencyexchange-service.yaml
+kubectl apply -f ./deploy/currencyexchange-ingress.yaml
+```
+
+6. Use `https://<INGRESS_SUBDOMAIN>` to access the currency exchange microservice (Swagger) 
 
 
 

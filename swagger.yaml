@@ -10,7 +10,7 @@ info:
   license:
     name: Apache 2.0
     url: 'https://github.com/bee-travels/bee-travels/blob/master/LICENSE'
-host: 'localhost:40001'
+host: 'localhost:4001'
 basePath: /api/v1
 tags:
   - name: Currency

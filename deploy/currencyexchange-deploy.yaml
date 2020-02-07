@@ -17,7 +17,9 @@ spec:
           imagePullPolicy: Always
           env:
             - name: HOST_IP
-              value: <INGRESS_SUBDOMAIN>
+              value: <IP_OR_SUBDOMAIN>
+            - name: SCHEME
+              value: <SCHEME>
           ports:
             - containerPort: 4001
 

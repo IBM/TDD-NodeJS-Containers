@@ -4,23 +4,20 @@
 
 This code pattern shows you how to create a world class currency conversion microservice in Node.js. This code pattern is a microservice that is a part of the [Bee Travels project](https://github.com/bee-travels).
 
-This pattern showcases modern Node.js development by using modern JavaScript, and best of breed, popular NPM libraries, which are listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page. 
+This pattern showcases modern Node.js development by using modern JavaScript and popular `npm` libraries, which are listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page. 
 
-This application was created using Test Driven Development(TDD) methodologies, in particular the Red-Green-Refactor or test first approach. No code was written without ***first*** writing an associated unit-test.
+This application was created using test-driven development(TDD) methodologies, in particular the Red-Green-Refactor or test-first approach. No code was written without ***first*** writing an associated unit test.
 
- Read our article [5 steps of test-driven development](https://developer.ibm.com/articles/5-steps-of-test-driven-development/) to get the background information on the TDD approach we used create the currency exchange microservice in this code pattern.
+Read our article [5 steps of test-driven development](https://developer.ibm.com/articles/5-steps-of-test-driven-development/) to get the background information on the TDD approach we used to create the currency exchange microservice in this code pattern.
 
- Code that has unit-tests is regarded as better!  It means the code will be better and more accurate.  Also the unit-test function as a way of understanding the application.  Requirement translate into tests, so examining the tests gives one an idea what the application does, and it also shows how to use the code.
+Code that has unit tests is regarded as more complete and accurate. The unit tests function as a means to clearly understand the application. Requirements for the application translate into tests, so examining the tests gives you an idea about what the application does, and it also shows how to use the code. For our unit tests we use [Jest](https://jestjs.io/), a JavaScript unit-test framework testing library that works well with TDD.
 
-For our unit tests we use [Jest](https://jestjs.io/), a JavaScript unit-test framework testing library that works well with TDD.
+## After following this code pattern, you will understand how to:
 
-## After reading this code pattern, you will understand how to:
-
-* Design and create a Node.js microservice with a REST interface that has a  swagger test harness where you can manually inspect, discover and run the various API endpoint.
-* Use and run this simple microservice 
-* Use the code base as a reference architecture and toolchain to create your own Node.js microservices 
-* Deploy and run this microservice on Kubernetes
-
+* Design and create a Node.js microservice with a REST interface that has a swagger test harness where you can manually inspect, discover, and run the various API endpoints.
+* Use and run this simple microservice.
+* Use the code base as a reference architecture and toolchain to create your own Node.js microservices.
+* Deploy and run this microservice on Kubernetes.
 
 ## Architecture
 
@@ -39,19 +36,18 @@ This flow is for the runtime of the currency conversion microservice.
 
 ## Included components
 
-* [IBM Cloud Container Service](https://console.bluemix.net/docs/containers/container_index.html):  IBM Bluemix Container Service manages highly available apps inside Docker containers and Kubernetes clusters on the IBM Cloud.
+* [IBM Cloud Container Service](https://console.bluemix.net/docs/containers/container_index.html): IBM Bluemix Container Service manages highly available apps inside Docker containers and Kubernetes clusters on the IBM Cloud.
 * [Swagger](https://swagger.io/): A framework of API developer tools for the OpenAPI Specification that enables development across the entire API lifecycle.
-
 
 ## Featured technologies
 
 * [Container Orchestration](https://www.ibm.com/cloud-computing/bluemix/containers): Automating the deployment, scaling and management of containerized applications.
-* [Microservices](https://www.ibm.com/developerworks/community/blogs/5things/entry/5_things_to_know_about_microservices?lang=en): Collection of fine-grained, loosely coupled services using a lightweight protocol to provide building blocks in modern application composition in the cloud.
-* [Node.js](https://nodejs.org/): Node.js is a JavaScript framework which has an awesome package manager called `npm` that lets you build awesome applications with components built and supported by an active Open Source community.
-* [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js
-* [Axios](https://www.npmjs.com/package/axios): Promise based HTTP client for the browser and Node.js
+* [Microservices](https://www.ibm.com/developerworks/community/blogs/5things/entry/5_things_to_know_about_microservices?lang=en): Collections of fine-grained, loosely coupled services using a lightweight protocol to provide building blocks in modern application composition in the cloud.
+* [Node.js](https://nodejs.org/): Node.js is a JavaScript framework which has an awesome package manager called `npm` that lets you build applications with components built and supported by an active open source community.
+* [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js.
+* [Axios](https://www.npmjs.com/package/axios): Promise based HTTP client for the browser and Node.js.
 * [csvtojson](https://www.npmjs.com/package/csvtojson): A node module is a comprehensive nodejs csv parser to convert csv to json or column arrays
-* [esm]https://www.npmjs.com/package/esm): The brilliantly simple, babel-less, bundle-less ECMAScript module loader.
+* [esm](https://www.npmjs.com/package/esm): The brilliantly simple, babel-less, bundle-less ECMAScript module loader.
 <details><summary><strong>Why JavaScript Modules?</strong></summary>
 
 > esm is the world’s most advanced ECMAScript module loader. This fast, production ready, zero dependency loader is all you need to support ECMAScript modules in Node 6+. 
@@ -59,27 +55,26 @@ See the release [post](https://medium.com/web-on-the-edge/tomorrows-es-modules-t
 </details>
 
 # Prerequisites
+You need to have the following installed to complete the steps in this code pattern:
 
 * [Docker](https://www.docker.com/products/docker-desktop)
 * [IBM Cloud Kubernetes Service Provisioned](https://www.ibm.com/cloud/container-service)
 
-For running these services locally without Docker containers, the following will be needed:
+For running these services locally without Docker containers, you need:
 
 * [Node.js v10 or later](https://nodejs.org/en/download/)
-<details><summary><strong>TIP: use Node Version Manager(nvm)</strong></summary>
-> `nvm` is a "POSIX-compliant bash script to manage multiple active node.js versions"
-
-> We recommend using `Node Version Manager(NVM)` to control the version of Node.js/NPM you use.
-> Why? The system or Operating system installed Node.js version is fixed.  You may need different versions of Node for other projects.  
-> NVM allows you to choose and switch which version of node and NPM that suits your needs 
+<details><summary><strong>Tip: Use Node Version Manager (nvm)</strong></summary>
+> nvm is a simple bash script to manage multiple active Node.js versions.
+> We recommend using `Node Version Manager (NVM)` to control the version of Node.js that you use.
+> Why? The system or operating system installed Node.js version is fixed. You may need different versions of Node for other projects.  
+> NVM allows you to choose and switch to the version of Node.js that suits your needs.
 > Install via command line:
 
 ```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 ```
 
-
-NVM details and most up to date installation instructions [read here](https://github.com/nvm-sh/nvm)
+[Learn more about NVM](https://github.com/nvm-sh/nvm) and find the latest installation instructions.
 
 </details>
 
@@ -88,9 +83,9 @@ NVM details and most up to date installation instructions [read here](https://gi
 
 
 
-### This code pattern was built 100% TDD and has 100% test coverage.we 
+### This code pattern was built 100% TDD and has 100% test coverage.
 
-We used Jest as our unit test framework. Jest uses the popular `describe`, `it`, and `expect` syntax, as seen here: [src/services/countryCurrencyCodeHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/countryCurrencyCodeHandler.test.js#L17-L26).
+We use Jest as our unit test framework. Jest uses the popular `describe`, `it`, and `expect` syntax, as seen here: [src/services/countryCurrencyCodeHandler.test.js](https://github.com/IBM/TDD-NodeJS-Containers/blob/master/src/services/countryCurrencyCodeHandler.test.js#L17-L26).
 
  Remember to use mock data so that your tests don't fail because of changing data.
 
@@ -104,13 +99,12 @@ The unit tests we run in this pattern are run in the deployment pipeline as you 
 
 # Steps 
 
-Follow these steps to setup and run this code pattern locally and on the Cloud. The steps are described in detail below.
+Follow these steps to set up and run this code pattern locally and on the cloud. The steps are described in detail below.
 
 1. [Clone the repo](#1-clone-the-repo)
 2. [Run the application locally](#2-run-the-application-locally)
 3. [Build a docker image, then run it locally](#3-Build-a-docker-image-then-run-it-locally)
 4. [Deploy to IBM Cloud](#4-deploy-to-ibm-cloud)
-
 
 
 ### 1. Clone the repo
@@ -126,7 +120,7 @@ cd TDD-NodeJS-Containers
 ### 2. Run the application locally
 
 1. Install packages with NPM by running `npm install`.
-1. Start the app by running  `npm start`.
+1. Start the app by running `npm start`.
 1. Browse the API from your browser `localhost:4001`.
 
 > Note: The server host can be changed as required in the server.js file, and `PORT` can be set in the `.env` file.
@@ -136,10 +130,10 @@ cd TDD-NodeJS-Containers
 1. Make sure you are at the root of this application.
 1. Note your docker-hub username
 <details><summary><strong>How to find your docker hub credentials</strong></summary>
-> to download docker desktop you'll need to have created a docker hub account.
+> To download Docker desktop you must create a Docker hub account.
 
-> to find the username, you can click on at your docker desktop icon (mac) toolbar 
-![Docker Desktop Find your logged in Username](./doc/source/images/docker-desktop-get-username.png)
+> To find the username, you can click on at your Docker desktop icon (mac) toolbar 
+![Docker Desktop Find your logged-in username](./doc/source/images/docker-desktop-get-username.png)
 </details>
 
 1. Build the docker image by running:
@@ -149,7 +143,7 @@ export DOCKERHUB_USERNAME=<your-dockerhub-username>
 docker build -t $DOCKERHUB_USERNAME/currencyexchange:latest .
 ```
 
-<details><summary><strong>expected output details</strong></summary>
+<details><summary><strong>Expected output details</strong></summary>
 ![detailed output from docker build](./doc/source/images/docker-build-output.png)
 
 </details>
@@ -157,8 +151,8 @@ docker build -t $DOCKERHUB_USERNAME/currencyexchange:latest .
 >
 > Wondering if your build is current or cached?
 
-<details><summary><strong>How to clean up docker images that may be out of date</strong></summary>
-> Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — that are dangling (not associated with a container):
+<details><summary><strong>How to clean up Docker images that may be out of date</strong></summary>
+> Docker provides a single command that will clean up any resources &mdash; images, containers, volumes, and networks &mdash; that are dangling (not associated with a container):
 
 ```bash
 docker system prune -a
@@ -171,22 +165,23 @@ docker images -a |  grep "currencyexchange"
 ```
 ![docker images](./doc/source/images/docker-images-grep.png)
 
-If in doubt that this was the latest build?  It looks like it's not as it was created 12 hours ago, you can delete that image by running:
+Do you doubt that this was the latest build? Its timestamp is 12 hours ago, so it's probably not the latest. You can delete that image by running:
 
 ```bash
 docker images -a | grep "currencyexchange" | awk '{print $3}' | xargs docker rmi -f
 ```
-Then re-run:
+
+Then rerun:
 
 ```bash
 docker build -t $DOCKERHUB_USERNAME/currencyexchange:v0.0.1 .    
 ```
 
-More details on Docker image management [read here](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
+Find more details on [Docker image management](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
 
 </details>
 
-Great!  So now lets run the image locally!
+Great!  So, now lets run the image locally!
 
 ```bash
  docker run -p 4001:4001 grantsteinfeldibm/currencyexchange:v0.0.1
@@ -203,7 +198,7 @@ Explore the microservice with the Open API Doc (Swagger) at
 
 ### 4. Deploy to IBM Cloud
 
-1. To allow changes to the this microservice create a repo on [Docker Cloud](https://cloud.docker.com/) where the new modified containers will be pushed to. 
+1. To allow changes to the this microservice, create a repo on [Docker Cloud](https://cloud.docker.com/) where you can push the new modified containers. 
 
 > NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to the name of the new repo used in [<<repo_root>>/deploy/xxx-webapp.yml](./deploy/deploy-svcxxxx.yml).
 
@@ -218,7 +213,7 @@ docker push $DOCKERHUB_USERNAME/currencyexchange:v0.0.1
 
 ```
 
- Provision the [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service) and follow the set of instructions for creating a Container and Cluster based on your cluster type, `Standard` vs `Lite`.
+Provision the [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service) and follow the set of instructions for creating a container and cluster based on your cluster type, `Standard` vs `Lite`.
 
 
 
@@ -253,7 +248,7 @@ docker push $DOCKERHUB_USERNAME/currencyexchange:v0.0.1
 
 ![Git pre-commit hooks](./doc/source/images/pre-commit-hook-syntax-error-csnt-const.jpg)
 
-***Figure 3. Syntax error caught by Git pre-commit hooks with both linter 1 (eslint) and formatter 2 (prettier)***
+***Figure 3. Syntax error caught by Git pre-commit hooks with both linter 1 (ESLint) and formatter 2 (Prettier)***
 
 
    This is achieved with the two `npm` libraries `lint-staged` and `husky`, which are installed by running `npx` as such:
@@ -296,6 +291,7 @@ docker push $DOCKERHUB_USERNAME/currencyexchange:v0.0.1
 * [Using Test-Driven Development for Microservices](https://nordicapis.com/using-test-driven-development-for-microservices/),  by Bill Doerrfeld
 * [Test-Driven Java Development, Second Edition: Invoke TDD principles for end-to-end application development](https://www.amazon.com/Test-Driven-Java-Development-Viktor-Farcic-ebook/dp/B00YSIM3SC), by Viktor Farcic
 * [Blog on colocaton of unit-tests](https://kentcdodds.com/blog/colocation), by Ken Dodd
+* [Python testing with pytest](https://pragprog.com/book/bopytest/python-testing-with-pytest), by Brian Okken
 
 # License
 

@@ -279,7 +279,8 @@ docker push $DOCKERHUB_USERNAME/currencyexchange:v0.0.1
 * **JavaScript Transpiler**  
 
 * esm 
- * The brilliantly simple, babel-less, bundle-less ECMAScript module loader.
+    * The brilliantly simple, babel-less, bundle-less ECMAScript module loader.
+    * Allows you to use modern JavaScript for example: `modules` with `import` and `export` rather than the older `requires()` methods to link packages
 
 * [`rimraf`](https://www.npmjs.com/package/rimraf)
     * Cleanup previous builds and distributions

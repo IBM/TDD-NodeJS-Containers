@@ -10,6 +10,8 @@ This application was created using Test Driven Development(TDD) methodologies, i
 
  Read our article [5 steps of test-driven development](https://developer.ibm.com/articles/5-steps-of-test-driven-development/) to get the background information on the TDD approach we used create the currency exchange microservice in this code pattern.
 
+ Code that has unit-tests is regarded as better!  It means the code will be better and more accurate.  Also the unit-test function as a way of understanding the application.  Requirement translate into tests, so examining the tests gives one an idea what the application does, and it also shows how to use the code.
+
 For our unit tests we use [Jest](https://jestjs.io/), a JavaScript unit-test framework testing library that works well with TDD.
 
 ## After reading this code pattern, you will understand how to:

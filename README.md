@@ -50,8 +50,14 @@ This flow is for the runtime of the currency conversion microservice.
 * [esm](https://www.npmjs.com/package/esm): The brilliantly simple, babel-less, bundle-less ECMAScript module loader.
 <details><summary><strong>Why JavaScript Modules?</strong></summary>
 
-> esm is the world’s most advanced ECMAScript module loader. This fast, production ready, zero dependency loader is all you need to support ECMAScript modules in Node 6+. 
-See the release [post](https://medium.com/web-on-the-edge/tomorrows-es-modules-today-c53d29ac448c) for details!
+> Modules in JavaScript are really great feature in the latest version of the language. Unfortunately it's not supported in earlier versions of Node.js ( < ver 13.2.x )
+
+> So in order to use these new features you'll need a transpiler to generate plain old JavaScript for now.
+
+> we recomment `esm` which is the world’s most advanced ECMAScript module loader. This fast, production ready, zero dependency loader is all you need to support ECMAScript modules in Node 6+. 
+
+> See the release [post](https://medium.com/web-on-the-edge/tomorrows-es-modules-today-c53d29ac448c) for details!
+
 </details>
 
 # Prerequisites
@@ -64,10 +70,15 @@ For running these services locally without Docker containers, you need:
 
 * [Node.js v10 or later](https://nodejs.org/en/download/)
 <details><summary><strong>Tip: Use Node Version Manager (nvm)</strong></summary>
+
 > nvm is a simple bash script to manage multiple active Node.js versions.
+
 > We recommend using `Node Version Manager (NVM)` to control the version of Node.js that you use.
+
 > Why? The system or operating system installed Node.js version is fixed. You may need different versions of Node for other projects.  
+
 > NVM allows you to choose and switch to the version of Node.js that suits your needs.
+
 > Install via command line:
 
 ```sh
@@ -130,9 +141,11 @@ cd TDD-NodeJS-Containers
 1. Make sure you are at the root of this application.
 1. Note your docker-hub username
 <details><summary><strong>How to find your docker hub credentials</strong></summary>
+
 > To download Docker desktop you must create a Docker hub account.
 
 > To find the username, you can click on at your Docker desktop icon (mac) toolbar 
+
 ![Docker Desktop Find your logged-in username](./doc/source/images/docker-desktop-get-username.png)
 </details>
 
@@ -152,6 +165,7 @@ docker build -t $DOCKERHUB_USERNAME/currencyexchange:latest .
 > Wondering if your build is current or cached?
 
 <details><summary><strong>How to clean up Docker images that may be out of date</strong></summary>
+
 > Docker provides a single command that will clean up any resources &mdash; images, containers, volumes, and networks &mdash; that are dangling (not associated with a container):
 
 ```bash
@@ -200,7 +214,7 @@ Explore the microservice with the Open API Doc (Swagger) at
 
 1. To allow changes to the this microservice, create a repo on [Docker Cloud](https://cloud.docker.com/) where you can push the new modified containers. 
 
-> NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to the name of the new repo used in [<<repo_root>>/deploy/xxx-webapp.yml](./deploy/deploy-svcxxxx.yml).
+> NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to the name of the new repo used in [<<repo_root>>/deploy/currencyexchange-deploy.yaml](./deploy/currencyexchange-deploy.yaml).
 
 ```bash
 export DOCKERHUB_USERNAME=<your-dockerhub-username>

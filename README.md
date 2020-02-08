@@ -250,35 +250,50 @@ The output of this command will contain a KUBECONFIG environment variable that m
 export KUBECONFIG=/home/rak/.bluemix/plugins/container-service/clusters/Kate/kube-config-prod-dal10-<cluster_name>.yml
 ```
 
+#### Lite Cluster Instructions
 
-#### Standard Cluster Instructions
+3. Run `bx cs workers mycluster` and locate and take note of the `Public IP`. This IP is used to access the currency service API. 
 
-3. Run `ibmcloud cs cluster-get <CLUSTER_NAME>` and locate the `Ingress Subdomain` and `Ingress Secret`. This is the domain of the URL that is to be used to access the Data Service and UI on the Cloud. 
-
-
-
-In addition, update the `host` and `secretName` in [currencyexchange-ingress.yaml](currencyexchange-ingress.yaml)
-
-
+Update the `env` values `HOST_ID` and `SCHEME` in [currencyexchange-deploy.yaml](currencyexchange-deploy.yaml) 
+to the `Public IP` and `http or https`.
 
 4. To deploy the services to the IBM Cloud Kubernetes Service, run:
 
 ```bash
-
 kubectl apply -f ./deploy/currencyexchange-deploy.yaml
 
 
 ## Confirm the services are running - this may take a minute
 kubectl get pods
+```
+
+5. Use `https://PUBLIC_IP:32001` to access the currency exchange microservice (Swagger) 
+
+
+
+#### Standard Cluster Instructions
+
+3. Run `ibmcloud cs cluster-get <CLUSTER_NAME>` and locate and take note of the `Ingress Subdomain` and `Ingress Secret`. 
+This is the domain of the URL and credentials that are used to access the microservice on the Cloud. 
+
+Update the `env` values `HOST_ID` and `SCHEME` in [currencyexchange-deploy.yaml](currencyexchange-deploy.yaml) 
+to the `Ingress Subdomain` and `http or https`.
+
+In addition, update the `host` and `secretName` in [currencyexchange-ingress.yaml](currencyexchange-ingress.yaml)
+
+4. To deploy the services to the IBM Cloud Kubernetes Service, run:
+
+```bash
+kubectl apply -f ./deploy/currencyexchange-deploy.yaml
+
+## Confirm the services are running - this may take a minute
+kubectl get pods
 
 ## Update protocol being used to https
-kubectl apply -f ./deploy/currencyexchange-service.yaml
 kubectl apply -f ./deploy/currencyexchange-ingress.yaml
 ```
 
-6. Use `https://<INGRESS_SUBDOMAIN>` to access the currency exchange microservice (Swagger) 
-
-
+5. Use `https://<INGRESS_SUBDOMAIN>` to access the currency exchange microservice (Swagger) 
 
 
 ## Anatomy of this application

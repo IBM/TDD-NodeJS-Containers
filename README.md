@@ -216,7 +216,7 @@ Explore the microservice with the Open API Doc (Swagger) at
 
 1. To allow changes to the this microservice, create a repo on [Docker Cloud](https://cloud.docker.com/) where you can push the new modified containers. 
 
-> NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to the name of the new repo used in [<<repo_root>>/deploy/currencyexchange-deploy.yaml](./deploy/currencyexchange-deploy.yaml).
+> NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to the name of the new repo used in [./deploy/currencyexchange-deploy.yaml](./deploy/currencyexchange-deploy.yaml).
 
 ```bash
 export DOCKERHUB_USERNAME=<your-dockerhub-username>
@@ -229,7 +229,7 @@ docker push $DOCKERHUB_USERNAME/currencyexchange:v0.0.1
 
 ```
 
-2. Provision the [IBM Cloud Kubernetes Service](https://cloud.ibm.com/kubernetes/catalog/cluster) and follow the set of instructions for creating a Container and Cluster based on your cluster type, `Standard` vs `Lite`.
+2. Provision an [IBM Cloud Kubernetes Service](https://cloud.ibm.com/kubernetes/catalog/cluster) and follow the set of instructions for creating a Container and Cluster based on your cluster type, `Standard` vs `Lite`.
 
 * Login to the IBM Cloud using the [Developer Tools CLI](https://www.ibm.com/cloud/cli):
 > NOTE use `--sso` if you have a single sign on account, or delete for username/password login
@@ -252,10 +252,10 @@ export KUBECONFIG=/home/rak/.bluemix/plugins/container-service/clusters/Kate/kub
 
 #### Lite Cluster Instructions
 
-3. Run `bx cs workers mycluster` and locate and take note of the `Public IP`. This IP is used to access the currency service API. 
+3. Run `bx cs workers <CLUSTER_NAME>` and locate and take note of the `Public IP`. This IP is used to access the currency service API. 
 
 Update the `env` values `HOST_ID` and `SCHEME` in [currencyexchange-deploy.yaml](currencyexchange-deploy.yaml) 
-to the `Public IP` and `http or https`.
+to the `<PUBLIC_IP>:32001` and `http`.
 
 4. To deploy the services to the IBM Cloud Kubernetes Service, run:
 
@@ -267,7 +267,7 @@ kubectl apply -f ./deploy/currencyexchange-deploy.yaml
 kubectl get pods
 ```
 
-5. Use `https://PUBLIC_IP:32001` to access the currency exchange microservice (Swagger) 
+5. Use `http://<PUBLIC_IP>:32001` to access the currency exchange microservice (Swagger) 
 
 
 
@@ -277,7 +277,7 @@ kubectl get pods
 This is the domain of the URL and credentials that are used to access the microservice on the Cloud. 
 
 Update the `env` values `HOST_ID` and `SCHEME` in [currencyexchange-deploy.yaml](currencyexchange-deploy.yaml) 
-to the `Ingress Subdomain` and `http or https`.
+to the `Ingress Subdomain` and `https`.
 
 In addition, update the `host` and `secretName` in [currencyexchange-ingress.yaml](currencyexchange-ingress.yaml)
 
@@ -295,9 +295,15 @@ kubectl apply -f ./deploy/currencyexchange-ingress.yaml
 
 5. Use `https://<INGRESS_SUBDOMAIN>` to access the currency exchange microservice (Swagger) 
 
+## Expected output - Swagger API 
+You should see the Swagger page like this.
+
+![Swagger API documentation and test harness](./doc/source/images/swagger-currencyexchange.png)
+
 
 ## Anatomy of this application
 
+These are the key components of this microservice.
 
 * **Jest for `Delightful` unit testing** 
 
@@ -369,7 +375,6 @@ kubectl apply -f ./deploy/currencyexchange-ingress.yaml
 * [Using Test-Driven Development for Microservices](https://nordicapis.com/using-test-driven-development-for-microservices/),  by Bill Doerrfeld
 * [Test-Driven Java Development, Second Edition: Invoke TDD principles for end-to-end application development](https://www.amazon.com/Test-Driven-Java-Development-Viktor-Farcic-ebook/dp/B00YSIM3SC), by Viktor Farcic
 * [Blog on colocaton of unit-tests](https://kentcdodds.com/blog/colocation), by Ken Dodd
-* [Python testing with pytest](https://pragprog.com/book/bopytest/python-testing-with-pytest), by Brian Okken
 
 # License
 

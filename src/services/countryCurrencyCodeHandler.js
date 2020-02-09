@@ -16,6 +16,12 @@ async function readData() {
   return jsonArray;
 }
 
+async function getNumberOfEntriesInCsv() {
+  //look at csv and count
+  const data = await readData();
+  return { lenCsv: data.length };
+}
+
 async function getCurrencyNameAndCode(countryName) {
   if (!countryName) {
     throw new Error('please pass in a country name');
@@ -38,28 +44,15 @@ async function getCountryAndCurrencyCode(currencyCode) {
 
   const data = await readData();
 
-  let outputDict = null;
-  let outputRows = [];
-  let counter = 0;
+  //arrow (lambda) function called on each item in the array to match
+  const matches = data.filter(row => row.currencyCode.toLowerCase() === currencyCode.toLowerCase());
+  if (matches.length === 0) throw new NotFoundError(`currency code ${currencyCode} not found`);
 
-  for (var row in data) {
-    var row_ = data[row];
-    if (row_.currencyCode.toLowerCase() === currencyCode.toLowerCase()) {
-      counter++;
-      if (counter === 1) {            //create output dict.
-        outputDict = row_;
-      }
-      outputRows.push(row_.country);
-    }
-  }
-
-  if (row_.length === 0 && outputDict === null) {
-    throw new NotFoundError(`currency code ${currencyCode} not found`);
-  }
-
-  outputDict.country = outputRows;
-
-  return outputDict;
+  return {
+    currencyCode: matches[0].currencyCode,
+    currencyName: matches[0].currencyName,
+    country: matches.map(row => row.country), //mapping on matches to extract currency name
+  };
 }
 
-export { getCurrencyNameAndCode, getCountryAndCurrencyCode };
+export { getCurrencyNameAndCode, getCountryAndCurrencyCode, getNumberOfEntriesInCsv };

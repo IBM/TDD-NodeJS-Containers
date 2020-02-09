@@ -1,4 +1,8 @@
-import { getCurrencyNameAndCode, getCountryAndCurrencyCode } from './countryCurrencyCodeHandler';
+import {
+  getCurrencyNameAndCode,
+  getCountryAndCurrencyCode,
+  getNumberOfEntriesInCsv,
+} from './countryCurrencyCodeHandler';
 
 describe('Get Currency Name and Code without country parameter', () => {
   it('should return a error country is required', async () => {
@@ -32,6 +36,15 @@ describe('Get Currency Name and Country name(s) in a list given a well known cou
       currencyCode: 'ZAR',
       currencyName: 'South African rand',
       country: ['South Africa'],
+    });
+  });
+});
+
+describe('Count the number of coutries in the csv file', () => {
+  it('should return the length of the csv file', async () => {
+    const lenCsv = await getNumberOfEntriesInCsv();
+    expect(lenCsv).toEqual({
+      lenCsv: 253,
     });
   });
 });

@@ -22,7 +22,6 @@
     "pino": "^5.16.0",
     "pino-pretty": "^3.5.0",
     "swagger-ui-express": "^4.1.1",
-    "uninstall": "0.0.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {

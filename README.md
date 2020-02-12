@@ -254,7 +254,7 @@ export KUBECONFIG=/home/rak/.bluemix/plugins/container-service/clusters/Kate/kub
 
 3. Run `bx cs workers <CLUSTER_NAME>` and locate and take note of the `Public IP`. This IP is used to access the currency service API. 
 
-Update the `env` values `HOST_ID` and `SCHEME` in [currencyexchange-deploy.yaml](currencyexchange-deploy.yaml) 
+Update the `env` values `HOST_IP` and `SCHEME` in [./deploy/currencyexchange-deploy.yaml](./deploy/currencyexchange-deploy.yaml) 
 to the `<PUBLIC_IP>:32001` and `http`.
 
 4. To deploy the services to the IBM Cloud Kubernetes Service, run:

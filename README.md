@@ -276,10 +276,10 @@ kubectl get pods
 3. Run `ibmcloud cs cluster-get <CLUSTER_NAME>` and locate and take note of the `Ingress Subdomain` and `Ingress Secret`. 
 This is the domain of the URL and credentials that are used to access the microservice on the Cloud. 
 
-Update the `env` values `HOST_ID` and `SCHEME` in [currencyexchange-deploy.yaml](currencyexchange-deploy.yaml) 
+Update the `env` values `HOST_IP` and `SCHEME` in [./deploy/currencyexchange-deploy.yaml](./deploy/currencyexchange-deploy.yaml) 
 to the `Ingress Subdomain` and `https`.
 
-In addition, update the `host` and `secretName` in [currencyexchange-ingress.yaml](currencyexchange-ingress.yaml)
+In addition, update the `host` and `secretName` in [./deploy/currencyexchange-ingress.yaml](./deploy/currencyexchange-ingress.yaml)
 
 4. To deploy the services to the IBM Cloud Kubernetes Service, run:
 
@@ -373,7 +373,6 @@ These are the key components of this microservice.
 # Resources
 
 * [Using Test-Driven Development for Microservices](https://nordicapis.com/using-test-driven-development-for-microservices/),  by Bill Doerrfeld
-* [Test-Driven Java Development, Second Edition: Invoke TDD principles for end-to-end application development](https://www.amazon.com/Test-Driven-Java-Development-Viktor-Farcic-ebook/dp/B00YSIM3SC), by Viktor Farcic
 * [Blog on colocaton of unit-tests](https://kentcdodds.com/blog/colocation), by Ken Dodd
 
 # License
